@@ -38,7 +38,7 @@ This will take some minutes for GCP to initialize on their backend.
 5. On the right side of the Billing page, under the circular graphic displaying your credits, click on the button to Upgrade your account.
 This could take a minute or two to take effect. You will receive an email saying "You've Upgraded." You can ignore it
 
-### Request Quota Increase
+### [Request Quota Increase](#gcp-guide)
 
 6. Click the hamburger again, navigate into "IAM & Admin" and click on "Quotas"
 
@@ -55,8 +55,8 @@ Here's a story: I previously read that if you managed to get a VM with x4 T4, it
 
 12. Your email will say you'll get your answer within 2 business days, but most likey it will arrive in under 2 minutes. If you tried for 4 and get denied, request again, but this time just for 1 and it should get approved.
 
-<align="right" [back to contents](#gcp-guide)>
-### Make A VM
+
+### [Make A VM](#gcp-guide)
 13. click the hamburger and click on Compute Engine
 
 14. click on "Create an Instance"
@@ -112,5 +112,25 @@ in "Value" type dev
 
 
 ### [Shutdown](#gcp-guide)
+50.
+  a) Emergency - if you forgot all about checking your credits and it's been over 3 months... you're defintely getting charged
 
+      i) When at console.cloud.google.com, on the left, click "Go to project settings"
+     ii) towards the top click the SHUTDOWN button and follow the directions
+    iii) click hamburger, click Billing. (you can click View Report to find how much you owe, but let's proceed with shut down)
+     iv) Right side of page, click on "Manage"
+	    v) top-middle click on "CLOSE BILLING ACCOUNT" and follow the instruction
+
+  b) A Gentle Shutdown - because researchers depend on the results of these WUs in order to build the next set of problems to fold, it's best to hit "Finish" on FAHControl so that once it finishes the current WU, it doesn't download another one and it pauses itself. Then that would be the ideal time to shut down like in (50)(a)
+
+  c) if you're trying to squeeze out more WU with the few remaining credits, remember that:
+	   i) credits shown may be delayed by up to a day
+	  ii) try to make sure you have enough credits to finish an unexpectedly longer WU.
+   iii) if you're waiting with the VM in a Stopped state to make sure credits gets updated, while you're not being charged for the VM unless it gets turned on, there are still small costs always accruing for the storage that everything sits on.
+	  iv) also, if you have VMs in the Stopped state, if you don't delete or edit your Cloud Scheduler Jobs, they will start your VM 
+	   v) if you removed your Cloud Scheduler Jobs and you decide to fold some more, you might need to recreate them again to handle preemptions
+	  vi) just because FAH is paused doesn't mean you're not getting charged. If the VM is on, it is costing you
+	 vii) if you use up all your credits, you're now paying out of pocket
+
+The End.
 
