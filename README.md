@@ -7,11 +7,11 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade)
   [B. request quota increase](#request-quota-increase)
   [C. make a VM](#make-a-vm)
-  D. prepare the VM
-  E. install / configure / monitor FAH
-  F. VM auto restart scheduling
-  G. checking credits
-  H. Shutdown
+  [D. prepare the VM](#prepare the vm)
+  [E. install / configure / monitor FAH](#installconfiguremonitor-fah)
+  [F. VM auto restart scheduling]
+  [G. checking credits]
+  [H. Shutdown]
 # Azure guide
   A. sign up and upgrade
   B. request quota increase
@@ -62,3 +62,19 @@ Here's a story: I previously read that if you managed to get a VM with x4 T4, it
 14. click on "Create an Instance"
 
 15. 
+
+### Prepare the VM
+
+
+### Install / Configure / Monitor FAH
+
+
+
+### VM auto restart scheduling
+
+
+
+### Checking Credits
+
+
+### Shutdown
