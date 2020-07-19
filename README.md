@@ -28,9 +28,9 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
 1. We start with a gmail account. GCP will occasionally send you emails, but you can unsubscribe. If you want to use a different gmail account, you can. Create a new gmail now if that's what you need to do.
 
 2. Then go to https://console.cloud.google.com
-Sign in, fill out the credit card verification, and make sure to create the INDIVIDUAL account, (not the business one). [fig 1]() (GCP will send some emails, like "Account confirmation - Complete your GCP Profile" but you can ignore all these b/c it's just checkboxes for your interests in order to send you more mail)
+Sign in, fill out the credit card verification, and make sure to create the INDIVIDUAL account, (not the business one). [fig 1](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig01.gif) (GCP will send some emails, like "Account confirmation - Complete your GCP Profile" but you can ignore all these b/c it's just checkboxes for your interests in order to send you more mail)
 
-3. After finishing sign up, click on "Compute Engine" [fig 2]()
+3. After finishing sign up, click on "Compute Engine" [fig 2](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig02.jpg)
 This will take some minutes for GCP to initialize on their backend.
 
 4. When that's done, click the the top left corner 'hamburger,' which is the 3 horizontal lines to open the Navigation Menu. Let's pin commonly used items to the top of the menu. Scroll down and look for "Compute Engine," and click on the 'push-pin' that appears when you mouse over the space to the left of the '>' which should pin Compute Engine to the top the menu. Now scroll about 40 items down into the TOOLS section to pin "Cloud Scheduler." Now scroll back up and just click on "Billing."
@@ -46,12 +46,12 @@ This could take a minute or two to take effect. You will receive an email saying
 
 8. select the result for "GPUs (all regions)" which will list a Compute Engine API on the page. Mark its checkbox then click on "Edit Quotas" that's above it.
 
-9. fill out your information in the open pane on the right and click next. 
-Here's a story: I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. 4 gpu slots in us-central1
+9. fill out your information in the open pane on the right and click next (any phone number will do). 
+Here's a story: I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. filter the quotas by 'preemptible' this time, and select the one with T4. Then filter by location and choose either central1, east1 or west1. 
 
-10. in the box for New Quota Limit, you can try 4 if you're hopeful, otherwise just put 1. 
+10. in the box for New Quota Limit for the GPUs (all Regions), you can try 4 if you're hopeful, otherwise just put 1. 
 
-11. for reason, write anyhing, like helping with Folding@Home, then submit request
+11. for the reason, write anyhing, like helping with Folding@Home, then submit request
 
 12. Your email will say you'll get your answer within 2 business days, but most likey it will arrive in under 2 minutes. If you tried for 4 and get denied, request again, but this time just for 1 and it should get approved.
 
@@ -63,9 +63,9 @@ Here's a story: I previously read that if you managed to get a VM with x4 T4, it
 
 15. Name is up to you
 
-16. Underneath "Add label" is Region. Choose 1 of 3 only: us-central1, us-east1, us-west1. 
-Zone: any will do EXCEPT for -c
-In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)
+16. Underneath "Add label" are Region & Zone. The cheapest Region will be from 1 of these only: us-central1, us-east1, us-west1. 
+Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b.
+(If you are looking for P100 instead, they'd be, respectively c/f; b/c; or a/b.
 
 17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)
 change the number of Cores to 1
@@ -87,7 +87,7 @@ in "Value" type dev
 
 23. click "Create" (although it says "you will be billed for this instance" it just means it's going to be using your free credits)
 
-  Once you see a green circle check mark next to the name, the VM is ready to put in GPU drivers and software.
+  Once you see a green circle check mark ![image](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/greenchk.gif) next to the name, the VM is ready to put in GPU drivers and software.
 
 
 
@@ -107,7 +107,7 @@ If you're not using chrome, there's a chance none may work as intended, so you'l
 ```
 sudo apt install wget
 ```
-(when it says Do you want to continue? [Y/n]
+(when it says Do you want to continue? [Y/n] 
 ( press y and then ENTER ) 
 
 ```
@@ -134,6 +134,7 @@ chmod +x NVIDIA-Linux-x86_64-410.104.run
 ```
  (if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete)
  (that command also doesn't output anything, so continue to next command)
+ (also-also, if you opted for P100 instead of T4, you might be better off with this driver us.download.nvidia.com/tesla/450.51.05/NVIDIA-Linux-x86_64-450.51.05.run )
 
 ```
 sudo ./NVIDIA-Linux-x86_64-410.104.run
@@ -147,7 +148,6 @@ sudo ./NVIDIA-Linux-x86_64-410.104.run
 
 
 
-wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-
 
 ### [Install / Configure / Monitor FAH](#gcp-guide)
 
