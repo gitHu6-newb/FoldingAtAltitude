@@ -4,23 +4,23 @@ A guide on how to upgrade your free GCP and Azure tiers and then set them up for
 Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding, all on linux for greater PPD. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
 
 # GCP guide
-  [A. sign up and upgrade](###-gcp-sign-up-and-upgrade)<br>
-  [B. request quota increase](###-request-quota-increase)<br>
+  [A. sign up and upgrade](###gcp-sign-up-and-upgrade)<br>
+  [B. request quota increase](###-Request-Quota-Increase)<br>
   C. make a VM<br>
   D. prepare the VM<br>
-  E. install / configure / monitor FAH
-  F. VM auto restart scheduling
-  G. checking credits
-  H. Shutdown
+  E. install / configure / monitor FAH<br>
+  F. VM auto restart scheduling<br>
+  G. checking credits<br>
+  H. Shutdown<br>
 # Azure guide
-  A. sign up and upgrade
-  B. request quota increase
-  C. make VM(s)
-  D. prepare the VM
-  E. install / configure / monitor FAH
-  F. VM auto restart scheduling
-  G. checking credits
-  H. Shutdown
+  A. sign up and upgrade<br>
+  B. request quota increase<br>
+  C. make VM(s)<br>
+  D. prepare the VM<br>
+  E. install / configure / monitor FAH<br>
+  F. VM auto restart scheduling<br>
+  G. checking credits<br>
+  H. Shutdown<br>
 
 =====================================================================================
 
