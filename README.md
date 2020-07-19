@@ -104,40 +104,40 @@ in "Value" type dev
 To paste into the black terminal window, try right clicking the mouse to find the paste option. Other methods are to hold SHIFT and press Insert
 or CTRL SHIFT v
 If you're not using chrome, there's a chance none may work as intended, so you'll have to type them.
----
+```
 sudo apt install wget
----
+```
 (when it says Do you want to continue? [Y/n]
 ( press y and then ENTER ) 
 
----
+```
 wget download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb
----
+```
 
----
+```
 sudo apt-get update
----
+```
 
----
+```
 sudo apt install clinfo
----
+```
 
----
+```
 sudo apt-get install gcc make linux-headers-$(uname -r)
----
+```
  ( Y for yes to continue)
 
----
+```
 wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-x86_64-410.104.run
 
 chmod +x NVIDIA-Linux-x86_64-410.104.run
----
+```
  (if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete)
  (that command also doesn't output anything, so continue to next command)
 
----
+```
 sudo ./NVIDIA-Linux-x86_64-410.104.run
----
+```
  (Screen will fill with a bunch of dots before changing to a progress bar. A minute later...
  (There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK
  (The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries" 
@@ -146,6 +146,8 @@ sudo ./NVIDIA-Linux-x86_64-410.104.run
  (You can check with command nvidia-smi )
 
 
+
+wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-
 
 ### [Install / Configure / Monitor FAH](#gcp-guide)
 
