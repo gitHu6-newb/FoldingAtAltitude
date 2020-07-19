@@ -14,13 +14,13 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
   [H. Shutdown](#shutdown)<br>
 # Azure guide
   A. sign up and upgrade<br>
-  B. request quota increase
+  B. request quota increase <br>
   C. make VM(s) <br>
-  D. prepare the VM
-  E. install / configure / monitor FAH
-  F. VM auto restart scheduling
-  G. checking credits
-  H. Shutdown
+  D. prepare the VM <br>
+  E. install / configure / monitor FAH <br>
+  F. VM auto restart scheduling <br>
+  G. checking credits <br>
+  H. Shutdown <br>
 
 =====================================================================================
 
@@ -112,25 +112,26 @@ in "Value" type dev
 
 
 ### [Shutdown](#gcp-guide)
-50.
-  a) Emergency - if you forgot all about checking your credits and it's been over 3 months... you're defintely getting charged
 
+50.
+
+  a) Emergency - if you forgot all about checking your credits and it's been over 3 months... you're defintely getting charged
       i) When at console.cloud.google.com, on the left, click "Go to project settings"
      ii) towards the top click the SHUTDOWN button and follow the directions
     iii) click hamburger, click Billing. (you can click View Report to find how much you owe, but let's proceed with shut down)
      iv) Right side of page, click on "Manage"
-	    v) top-middle click on "CLOSE BILLING ACCOUNT" and follow the instruction
+      v) top-middle click on "CLOSE BILLING ACCOUNT" and follow the instruction
 
   b) A Gentle Shutdown - because researchers depend on the results of these WUs in order to build the next set of problems to fold, it's best to hit "Finish" on FAHControl so that once it finishes the current WU, it doesn't download another one and it pauses itself. Then that would be the ideal time to shut down like in (50)(a)
 
   c) if you're trying to squeeze out more WU with the few remaining credits, remember that:
-	   i) credits shown may be delayed by up to a day
-	  ii) try to make sure you have enough credits to finish an unexpectedly longer WU.
-   iii) if you're waiting with the VM in a Stopped state to make sure credits gets updated, while you're not being charged for the VM unless it gets turned on, there are still small costs always accruing for the storage that everything sits on.
-	  iv) also, if you have VMs in the Stopped state, if you don't delete or edit your Cloud Scheduler Jobs, they will start your VM 
-	   v) if you removed your Cloud Scheduler Jobs and you decide to fold some more, you might need to recreate them again to handle preemptions
-	  vi) just because FAH is paused doesn't mean you're not getting charged. If the VM is on, it is costing you
-	 vii) if you use up all your credits, you're now paying out of pocket
+      i) credits shown may be delayed by up to a day
+     ii) try to make sure you have enough credits to finish an unexpectedly longer WU.
+    iii) if you're waiting with the VM in a Stopped state to make sure credits gets updated, while you're not being charged for the VM unless it gets turned on, there are still small costs always accruing for the storage that everything sits on.
+     iv) also, if you have VMs in the Stopped state, if you don't delete or edit your Cloud Scheduler Jobs, they will start your VM 
+      v) if you removed your Cloud Scheduler Jobs and you decide to fold some more, you might need to recreate them again to handle preemptions
+     vi) just because FAH is paused doesn't mean you're not getting charged. If the VM is on, it is costing you
+    vii) if you use up all your credits, you're now paying out of pocket
 
 The End.
 
