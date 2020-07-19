@@ -9,11 +9,11 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
   [C. make a VM](#make-a-vm)
   [D. prepare the VM](#prepare-the-vm)
   [E. install / configure / monitor FAH](#install--configure--monitor-fah)
-  [F. VM auto restart scheduling]
-  [G. checking credits]
-  [H. Shutdown]
+  [F. VM auto restart scheduling](#vm-auto-restart-scheduling)
+  [G. checking credits](#checking-credits)
+  [H. Shutdown](#shutdown)
 # Azure guide
-  A. sign up and upgrade
+  A. sign up and upgrade<br>
   B. request quota increase
   C. make VM(s)
   D. prepare the VM
