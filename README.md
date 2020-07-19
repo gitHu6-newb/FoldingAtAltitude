@@ -5,13 +5,13 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
 
 # GCP guide
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade)
-  [B. request quota increase](#request-quota-increase)
+  [B. request quota increase](#request-quota-increase)<br>
   [C. make a VM](#make-a-vm)
   [D. prepare the VM](#prepare-the-vm)
   [E. install / configure / monitor FAH](#install--configure--monitor-fah)
   [F. VM auto restart scheduling](#vm-auto-restart-scheduling)
   [G. checking credits](#checking-credits)
-  [H. Shutdown](#shutdown)
+  [H. Shutdown](#shutdown)<br>
 # Azure guide
   A. sign up and upgrade<br>
   B. request quota increase
@@ -55,26 +55,62 @@ Here's a story: I previously read that if you managed to get a VM with x4 T4, it
 
 12. Your email will say you'll get your answer within 2 business days, but most likey it will arrive in under 2 minutes. If you tried for 4 and get denied, request again, but this time just for 1 and it should get approved.
 
-
+<align="right" [back to contents](#gcp-guide)>
 ### Make A VM
 13. click the hamburger and click on Compute Engine
 
 14. click on "Create an Instance"
 
-15. 
+15. Name is up to you
 
+16. Underneath "Add label" is Region. Choose 1 of 3 only: us-central1, us-east1, us-west1. 
+Zone: any will do EXCEPT for -c
+In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)
+
+17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)
+change the number of Cores to 1
+change the Memory to 1.75
+
+18. Click "CPU platform and GPU"
+GPU type: select T4 (if selection not present, you'll have to change Zone from step (6))
+Number of GPUs: 1 in our case
+
+19. a couple lines below, double check to make sure Boot disk is set to Debian GNU/Linux 10 (buster)
+if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
+
+20. towards the bottom click on "Management, security, disks, networking..."
+
+21. scroll down to Metadata, then in "Key" type env
+in "Value" type dev
+
+22. for Availability policy >Preemptibility: change "Off(recommended)" to "On" (this option gives us 80-90% discounted rates compared to a dedicated setup)
+
+23. click "Create" (although it says "you will be billed for this instance" it just means it's going to be using your free credits)
+
+  Once you see a green circle check mark next to the name, the VM is ready to put in GPU drivers and software.
+
+
+
+
+
+
+<align="right" [back to contents](#gcp-guide)></text>
 ### Prepare the VM
 
-
+<align="right" [back to contents](#gcp-guide)>
 ### Install / Configure / Monitor FAH
 
 
-
+<align="right" [back to contents](#gcp-guide)>
 ### VM auto restart scheduling
 
 
 
+<align="right" [back to contents](#gcp-guide)>
 ### Checking Credits
 
 
+<text align="right" [back to contents](#gcp-guide)></text>
 ### Shutdown
+
+
