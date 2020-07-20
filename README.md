@@ -13,14 +13,14 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
   [G. checking credits](#checking-credits) <br>
   [H. Shutdown](#shutdown)<br>
 # Azure guide
-  A. sign up and upgrade<br>
-  B. request quota increase <br>
-  C. make VM(s) <br>
-  D. prepare the VM <br>
-  E. install / configure / monitor FAH <br>
-  F. VM auto restart scheduling <br>
-  G. checking credits <br>
-  H. Shutdown <br>
+  [A. sign up and upgrade](#sign-up-and-upgrade) <br>
+  [B. request quota increase](#req-quota-increase) <br>
+  [C. make VM(s)](#make-vm(s)) <br>
+  [D. prep the VM](#prep-the-vm) <br>
+  [E. install / config / monitor FAH](#install--config--monitor-fah) <br>
+  [F. VM restart automation](#vm-restart-automation) <br>
+  [G. check credits](#check-credits) <br>
+  [H. Azure Shutdown](#azure-shutdown) <br>
 
 =====================================================================================
 
@@ -46,8 +46,8 @@ This could take a minute or two to take effect. You will receive an email saying
 
 8. select the result for "GPUs (all regions)" which will list a Compute Engine API on the page. Mark its checkbox then click on "Edit Quotas" that's above it.
 
-9. fill out your information in the open pane on the right and click next (any phone number will do). 
-Here's a story: I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. filter the quotas by 'preemptible' this time, and select the one with T4. Then filter by location and choose either central1, east1 or west1. 
+9. fill out your information in the open pane on the right and click next (any phone number will do). <br>
+  I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. filter the quotas by 'preemptible' this time, and select the one with T4. Then filter by location and choose either central1, east1 or west1. 
 
 10. in the box for New Quota Limit for the GPUs (all Regions), you can try 4 if you're hopeful, otherwise just put 1. 
 
@@ -63,17 +63,18 @@ Here's a story: I previously read that if you managed to get a VM with x4 T4, it
 
 15. Name is up to you
 
-16. Underneath "Add label" are Region & Zone. The cheapest Region will be from 1 of these only: us-central1, us-east1, us-west1. 
+16. Underneath "Add label" are Region & Zone. The cheapest Regions are: us-central1, us-east1, and us-west1. 
 Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b.
-(If you are looking for P100 instead, they'd be, respectively c/f; b/c; or a/b.
+(If you are looking for P100 instead, choose, respectively c/f; b/c; or a/b.
 
 17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)
 change the number of Cores to 1
 change the Memory to 1.75
+[fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/fig_03.gif)
 
-18. Click "CPU platform and GPU"
+18. Click "CPU platform and GPU" then click on "Add GPU"
 GPU type: select T4 (if selection not present, you'll have to change Zone from step (6))
-Number of GPUs: 1 in our case
+Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also change (17) to 4 cores
 
 19. a couple lines below, double check to make sure Boot disk is set to Debian GNU/Linux 10 (buster)
 if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
@@ -96,7 +97,7 @@ in "Value" type dev
 
 
 ### [Prepare the VM](#gcp-guide)
-24. (The VM must be running). On the right end of the table, click on "SSH" (the actual box that says SSH, not the drop down menu)
+24. (The VM must be running, indicated by the green circle). On the right end of the table, click on "SSH" (the actual box that says SSH, not the drop down menu)
 
   A new window should pop open, saying "Connecting..."
 
@@ -198,7 +199,7 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
 
 
 
-### [request quota increase](#azure-guide) <br>
+### [req quota increase](#azure-guide) <br>
 
 
 
@@ -211,22 +212,22 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
 
 
 
-### [prepare the VM](#azure-guide) <br>
+### [prep the VM](#azure-guide) <br>
 
 
 
 
-### [install / configure / monitor FAH](#azure-guide) <br>
+### [install / config / monitor FAH](#azure-guide) <br>
 
 
 
-### [VM auto restart scheduling](#azure-guide) <br>
+### [VM restart automation](#azure-guide) <br>
 
 
 
-### [checking credits](#azure-guide) <br>
+### [check credits](#azure-guide) <br>
 
 
 
-### [Shutdown](#azure-guide)
+### [Azure Shutdown](#azure-guide)
 
