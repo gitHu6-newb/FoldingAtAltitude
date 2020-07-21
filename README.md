@@ -1,4 +1,5 @@
 # FoldingAtAltitude
+(get it? because we're in the cloud)
 A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
 
 Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding, all on linux for greater PPD. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
