@@ -68,32 +68,30 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 (If you are looking for P100 instead, choose, respectively c/f; b/c; or a/b.
 
 17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)<br>
- 
- change the number of Cores to 1
- 
- change the Memory to 1.75
+  change the number of Cores to 1<br>
+  change the Memory to 1.75<br>
  [fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/fig_03.gif)
 
-18. Click "CPU platform and GPU" then click on "Add GPU"
- GPU type: select T4 (if selection not present, you'll have to change Zone from step (6))
+18. Click "CPU platform and GPU" then click on "Add GPU"<br>
+ GPU type: select T4 (if selection not present, you'll have to change Zone from step (6))<br>
  Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also change (17) to 4 cores
 
-19. a couple lines below, double check to make sure Boot disk is set to Debian GNU/Linux 10 (buster)
+19. a couple lines below, double check to make sure Boot disk is set to Debian GNU/Linux 10 (buster)<br>
  if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
 
 20. towards the bottom click on "Management, security, disks, networking..."
 
-21. scroll down to Metadata, then in "Key" type env
- in "Value" type dev
+21. scroll down to Metadata, then in "Key" type env<br>
+ in "Value" type dev<br>
  [fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig04.gif)
 
-22. for Availability policy >Preemptibility: change "Off(recommended)" to "On"
- (this option gives us 80-90% discounted rates compared to a dedicated setup)
+22. for Availability policy >Preemptibility: change "Off(recommended)" to "On"<br>
+ (this option gives us 80-90% discounted rates compared to a dedicated setup)<br>
  [fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig05.gif)
 
 23. click "Create" (although it says "you will be billed for this instance" it just means it's going to be using your free credits)
 
-  Once you see a green circle check mark ![image](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/greenchk.gif) next to the name, the VM is ready to put in GPU drivers and software.
+  Once you see a green circle check mark ![image](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/greenchk.gif) next to the name, the VM is running and ready.
 
 
 
@@ -107,9 +105,9 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 
   A new window should pop open, saying "Connecting..."
 
-25. When it looks like it's waiting for you to type something in, copy and paste the below commands.
- To paste into the black terminal window, try right clicking the mouse to find the paste option. Other methods are to hold SHIFT and press Insert
-   or CTRL SHIFT v
+25. When it looks like it's waiting for you to type something in, copy and paste the below commands.<br>
+ To paste into the black terminal window, try right clicking the mouse to find the paste option. Other methods are to hold SHIFT and press Insert<br>
+   or CTRL SHIFT v<br>
  If you're not using chrome, there's a chance none may work as intended, so you'll have to type them.
 ```
 sudo apt install wget
@@ -138,17 +136,17 @@ wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-x86_64-410.104.run
 
 chmod +x NVIDIA-Linux-x86_64-410.104.run
 ```
- if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete
- (that command also doesn't output anything, so continue to next command)
+ if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete<br>
+ (that command also doesn't output anything, so just continue to next command)<br>
  (also-also, if you opted for P100 instead of T4, you might be better off with this driver us.download.nvidia.com/tesla/450.51.05/NVIDIA-Linux-x86_64-450.51.05.run )
 
 ```
 sudo ./NVIDIA-Linux-x86_64-410.104.run
 ```
-  Screen will fill with a bunch of dots before changing to a progress bar. A minute later, there will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK
- [fig 7]()
-   The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries..." just hit ENTER to continue
-   At "Installation... complete" Just hit ENTER for OK 
+  Screen will fill with a bunch of dots before changing to a progress bar. A minute later, there will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK<br>
+ [fig 7]()<br>
+   The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries..." just hit ENTER to continue<br>
+   At "Installation... complete" Just hit ENTER for OK <br>
    You can check info on the GPU with command
 ```
 nvidia-smi 
@@ -175,23 +173,23 @@ nvidia-smi
 
 50.
 
-  a) Emergency - if you forgot all about checking your credits and it's been over 3 months... you're defintely getting charged
-      i) When at console.cloud.google.com, on the left, click "Go to project settings"
-     ii) towards the top click the SHUTDOWN button and follow the directions
-    iii) click hamburger, click Billing. (you can click View Report to find how much you owe, but let's proceed with shut down)
-     iv) Right side of page, click on "Manage"
+  a) Emergency - if you forgot all about checking your credits and it's been over 3 months... you're defintely getting charged<br>
+      i) When at console.cloud.google.com, on the left, click "Go to project settings"<br>
+     ii) towards the top click the SHUTDOWN button and follow the directions<br>
+    iii) click hamburger, click Billing. (you can click View Report to find how much you owe, but let's proceed with shut down)<br>
+     iv) Right side of page, click on "Manage"<br>
       v) top-middle click on "CLOSE BILLING ACCOUNT" and follow the instruction
 
   b) A Gentle Shutdown - because researchers depend on the results of these WUs in order to build the next set of problems to fold, it's best to hit "Finish" on FAHControl so that once it finishes the current WU, it doesn't download another one and it pauses itself. Then that would be the ideal time to shut down like in (50)(a)
 
-  c) if you're trying to squeeze out more WU with the few remaining credits, remember that:
-      i) credits shown may be delayed by up to a day
-     ii) try to make sure you have enough credits to finish an unexpectedly longer WU.
-    iii) if you're waiting with the VM in a Stopped state to make sure credits gets updated, while you're not being charged for the VM unless it gets turned on, there are still small costs always accruing for the storage that everything sits on.
-     iv) also, if you have VMs in the Stopped state, if you don't delete or edit your Cloud Scheduler Jobs, they will start your VM 
-      v) if you removed your Cloud Scheduler Jobs and you decide to fold some more, you might need to recreate them again to handle preemptions
-     vi) just because FAH is paused doesn't mean you're not getting charged. If the VM is on, it is costing you
-    vii) if you use up all your credits, you're now paying out of pocket
+  c) if you're trying to squeeze out more WU with the few remaining credits, remember that:<br>
+      i) credits shown may be delayed by up to a day<br>
+     ii) try to make sure you have enough credits to finish an unexpectedly longer WU.<br>
+    iii) if you're waiting with the VM in a Stopped state to make sure credits gets updated, while you're not being charged for the VM unless it gets turned on, there are still small costs always accruing for the storage that everything sits on.<br>
+     iv) also, if you have VMs in the Stopped state, if you don't delete or edit your Cloud Scheduler Jobs, they will start your VM when you don't want them to<br>
+      v) if you removed your Cloud Scheduler Jobs and you decide to fold some more, you might need to recreate them again to handle preemptions<br>
+     vi) just because FAH is paused doesn't mean you're not getting charged. If the VM is on, it is costing you<br>
+    vii) if you use up all your credits, you're now paying out of pocket<br>
 
 The End.
 
@@ -230,15 +228,15 @@ We're still in the SSH session using CloudShell. To prevent FAH from starting be
 ```
 sudo nano /etc/hosts
 ```
-And at the bottom of that file add in:
-(make sure there's no space before each 127...)
+And at the bottom of that file add in:<br>
+(make sure there's no space between the left edge and each 127...)
 ```
 127.0.0.1      assign1.foldingathome.org
 127.0.0.1      assign2.foldingathome.org
 127.0.0.1      assign3.foldingathome.org
 127.0.0.1      assign4.foldingathome.org
 ```
-To exit nano, Cntl x
+To exit nano, Ctrl x<br>
 hit y then ENTER to save
 
 continue copy pasting commands (and if you're manually typing, TAB can autocomplete filenames)
@@ -273,7 +271,7 @@ Restore the hosts file by placing a number sign (#) in front of the 4 entries yo
 ```
 sudo nano /etc/hosts
 ```
-Cntl x then y then ENTER to save
+Ctrl x then y then ENTER to save
 
 Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like [fig ?](config)
 ```
@@ -285,7 +283,7 @@ you can copy paste this into the config
     <paused v='true'/>
   </slot>
 ```
-Cntl x then y then ENTER to save
+Ctrl x then y then ENTER to save
 
 ```
 sudo reboot
