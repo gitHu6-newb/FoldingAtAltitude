@@ -19,7 +19,7 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
   [D. prep the VM](#prep-the-vm) <br>
   [E. install / config / monitor FAH](#install--config--monitor-fah) <br>
   [F. VM restart automation](#vm-restart-automation) <br>
-  [G. check credits](#check-credits) <br>
+  [G. check credits](#check-credits)
   [H. Azure Shutdown](#azure-shutdown) <br>
 
 =====================================================================================
@@ -83,8 +83,10 @@ if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
 
 21. scroll down to Metadata, then in "Key" type env
 in "Value" type dev
+[fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig04.gif)
 
 22. for Availability policy >Preemptibility: change "Off(recommended)" to "On" (this option gives us 80-90% discounted rates compared to a dedicated setup)
+[fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig05.gif)
 
 23. click "Create" (although it says "you will be billed for this instance" it just means it's going to be using your free credits)
 
@@ -98,6 +100,7 @@ in "Value" type dev
 
 ### [Prepare the VM](#gcp-guide)
 24. (The VM must be running, indicated by the green circle). On the right end of the table, click on "SSH" (the actual box that says SSH, not the drop down menu)
+[fig 6](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig06.gif)
 
   A new window should pop open, saying "Connecting..."
 
@@ -108,8 +111,8 @@ If you're not using chrome, there's a chance none may work as intended, so you'l
 ```
 sudo apt install wget
 ```
-(when it says Do you want to continue? [Y/n] 
-( press y and then ENTER ) 
+ when it says Do you want to continue? [Y/n] 
+ press y and then ENTER 
 
 ```
 wget download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb
@@ -126,26 +129,29 @@ sudo apt install clinfo
 ```
 sudo apt-get install gcc make linux-headers-$(uname -r)
 ```
- ( Y for yes to continue)
+  Y for yes to continue
 
 ```
 wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-x86_64-410.104.run
 
 chmod +x NVIDIA-Linux-x86_64-410.104.run
 ```
- (if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete)
+ if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete
  (that command also doesn't output anything, so continue to next command)
  (also-also, if you opted for P100 instead of T4, you might be better off with this driver us.download.nvidia.com/tesla/450.51.05/NVIDIA-Linux-x86_64-450.51.05.run )
 
 ```
 sudo ./NVIDIA-Linux-x86_64-410.104.run
 ```
- (Screen will fill with a bunch of dots before changing to a progress bar. A minute later...
- (There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK
- (The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries" 
- (  we don't care about 32bit libraries. ENTER to continue
- (Third and final screen, "Installation... complete" Just hit ENTER for OK )
- (You can check with command nvidia-smi )
+  Screen will fill with a bunch of dots before changing to a progress bar. A minute later, there will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK
+ [fig 7]()
+   The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries..." just hit ENTER to continue
+   At "Installation... complete" Just hit ENTER for OK 
+   You can check info on the GPU with command
+```
+nvidia-smi 
+```
+[fig 8]()
 
 
 
@@ -195,39 +201,152 @@ The End.
 # Azure
 Azure puts a 30-day time limit on the $200 free credits, and the clock starts ticking as soon as you sign up. So pay attention not only to your credits, but also your last free day, because if you've still got resources when your credits expire, you could start to get charged no matter how many credits you still had.
 
-### [sign up and upgrade](#azure-guide)<br>
+### [sign up and upgrade](#azure-guide)
 
 
 
-### [req quota increase](#azure-guide) <br>
-
-
-
-
-
-
-### [make VM(s)](#azure-guide) <br>
+### [Req quota increase](#azure-guide)
 
 
 
 
 
-### [prep the VM](#azure-guide) <br>
+
+### [Make VM(s)](#azure-guide)
 
 
 
 
-### [install / config / monitor FAH](#azure-guide) <br>
+
+### [Prep the VM](#azure-guide)
 
 
 
-### [VM restart automation](#azure-guide) <br>
+
+### [Install / config / monitor FAH](#azure-guide)
+We're still in the SSH session using CloudShell. To prevent FAH from starting before we finish GPU configs, we're going to cut its Internet access using the hosts file. 
+```
+sudo nano /etc/hosts
+```
+And at the bottom of that file add in:
+(make sure there's no space before each 127...)
+```
+127.0.0.1      assign1.foldingathome.org
+127.0.0.1      assign2.foldingathome.org
+127.0.0.1      assign3.foldingathome.org
+127.0.0.1      assign4.foldingathome.org
+```
+To exit nano, Cntl x
+hit y then ENTER to save
+
+continue copy pasting commands (and if you're manually typing, TAB can autocomplete filenames)
+```
+sudo dpkg -i fahclient_7.6.13_amd64.deb
+```
+Follow the prompts to enter in Username, Team, and Passkey (if you have them)
+
+Choose option "full" [fig ?](clientfull)
+
+Choose option "YES" for FAH automatically starting
+You might see some red words on screen for errors, but ignore them.
+
+Continue commands (and note that FAHClient is not the same as Fahclient)
+```
+FAHClient --send-pause
+```
+The next commands write what you wrote back to the screen, which is how you tell it was successful
+```
+FAHClient --send-command "options gpu=true"
+```
+```
+FAHClient --send-command "options allow=YOUR.HOME.IP.ADDRESS"
+```
+This IP is the network from behind which you want to monitor the cloud WUs. Plenty of sites will tell you your IP, like https://www.whatsmyip.org/
+```
+FAHClient --send-command "options password=YourFAHRemotePassword"
+```
+[fig ?](fahcmd)
+
+Restore the hosts file by placing a number sign (#) in front of the 4 entries you made [fig ?](hosts)
+```
+sudo nano /etc/hosts
+```
+Cntl x then y then ENTER to save
+
+Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like [fig ?](config)
+```
+sudo nano /etc/fahclient/config.xml
+```
+you can copy paste this into the config
+```
+  <slot id='1' type='GPU'>
+    <paused v='true'/>
+  </slot>
+```
+Cntl x then y then ENTER to save
+
+```
+sudo reboot
+```
+In 30-45 seconds this cloud client should be "Online" in your FAHControl, still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going.
+Careful not to accidentally move the Folding Power slide bar. It took me way too long to notice that's what I had done once.
+If you need to make name/team/passkey changes and are having trouble doing it in FAHControl, SSH back in the VM and use FAHClient --send-command "options user=xxxx"
+or team or passkey in place of user
+
+Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in, SSH in again and sudo reboot
 
 
 
-### [check credits](#azure-guide) <br>
 
+
+### [VM restart automation](#azure-guide)
+After running my own and 2 other family members' accounts, a GPU spot VM has never been evicted, and only 1 cpu-folding VM has been evicted only once, so this section is almost unecessary if you monitor through FAHControl regularly, but here it is anyway.
+
+Type auto in the search bar at the top in the blue area and click on "Automation Accounts"
+
+Add/Create an Automation Account and fill in the info. Name: you creative (I named mine autobot), but the rest need to be chosen from their respective drop down menus, corresponding to the VM you made earlier. i.e. using the vm command from the beginning as an example, that would make Resource group = myCloudFolding and Location = East US. Then click Create
+
+When it lists your automation account, clicking on it opens a panel, then 12th item down click on Runbooks gallery [fig ?](auto2)
+
+Click on "Start Azure V2 VMs" and then click on "Import" and OK [fig ?](auto3)
+
+After importing it, click back to your automation Runbook gallery [fig ?](auto4)
+
+Now click on "Runbooks" and then the new "StartAzureV2Vm" [fig ?](auto5)
+
+Along the top, click on the "Edit" button
+
+Then click on the "Publish" button [fig ?](auto6), confirm "Yes"
+
+In the panel, click on Schedules, then "Add a schedule"
+
+Select "Schedule | Link a schedule to your runbook"
+
+"Create a schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and in the figure I have it set to check every 2 hours, then click "Create" [fig ?](auto7)
+
+No need for "Parameters and run settings" so just click on "OK" 
+This schedule should restart any and all VMs, even those you later create, whether it be in the same or different Resource Groups. If for some reason you need different schedules for different VMs, you can specifically target names in "Parameters and run settings." Lastly, the "Jobs" blade is how you check what/when schedules have ran if you're curious.
+
+
+
+
+
+
+### [Check credits](#azure-guide)
+From the home screen, click on "Cost Management," or click the hamburger and almost at the bottom is Cost Management -- Careful, the bar displaying your credits here only focuses on the current month, and it is NOT a running total
+
+A couple blades down in the left panel, click on the "Cost Analysis" blade. 
+
+About top-middle, open the date drop down and select "Custom date range" to pick your start day (or before it) to make sure you get your true cumulative total. In the following figure, the solid green is the cost spent per day, and the light green being projected costs. Here I realized well past the halfway point that I was well under spending $200 in 30 days, by about $40, so I spun up an identical VM. The projection can only be accurate if it has 7 days of steady history to work with, and at the end there on the 19th I have used up that $40 so I deleted that VM, but that change is too soon for the projection to make accurate predictions. Paper math says it'll perfectly work out though, with the 20th ending at $194.30 and my last day less than 199.50, depending on how early I end it synchronized with the WUs.
+[fig ?]()
 
 
 ### [Azure Shutdown](#azure-guide)
+Go to your portal, https://portal.azure.com
+
+Click on Subscriptions (the key icon), or type subscription in the search bar.
+
+Click on your subscription name, then at the top you can click on "Cancel subscription" and follow the instruction to type something to confirm.
+
+Hopefully you have enough time to use "Finish" on your FAHControl first to complete all current work units, as opposed to rushing to terminate before you start accruing charges :)
 
