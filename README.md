@@ -67,8 +67,10 @@ This could take a minute or two to take effect. You will receive an email saying
 Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b.
 (If you are looking for P100 instead, choose, respectively c/f; b/c; or a/b.
 
-17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)
+17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)<br>
+ 
  change the number of Cores to 1
+ 
  change the Memory to 1.75
  [fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/fig_03.gif)
 
