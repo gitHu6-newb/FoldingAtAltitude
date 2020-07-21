@@ -19,7 +19,7 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
   [D. prep the VM](#prep-the-vm) <br>
   [E. install / config / monitor FAH](#install--config--monitor-fah) <br>
   [F. VM restart automation](#vm-restart-automation) <br>
-  [G. check credits](#check-credits)
+  [G. check credits](#check-credits) <br>
   [H. Azure Shutdown](#azure-shutdown) <br>
 
 =====================================================================================
@@ -68,25 +68,26 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 (If you are looking for P100 instead, choose, respectively c/f; b/c; or a/b.
 
 17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)
-change the number of Cores to 1
-change the Memory to 1.75
-[fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/fig_03.gif)
+ change the number of Cores to 1
+ change the Memory to 1.75
+ [fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/fig_03.gif)
 
 18. Click "CPU platform and GPU" then click on "Add GPU"
-GPU type: select T4 (if selection not present, you'll have to change Zone from step (6))
-Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also change (17) to 4 cores
+ GPU type: select T4 (if selection not present, you'll have to change Zone from step (6))
+ Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also change (17) to 4 cores
 
 19. a couple lines below, double check to make sure Boot disk is set to Debian GNU/Linux 10 (buster)
-if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
+ if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
 
 20. towards the bottom click on "Management, security, disks, networking..."
 
 21. scroll down to Metadata, then in "Key" type env
-in "Value" type dev
-[fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig04.gif)
+ in "Value" type dev
+ [fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig04.gif)
 
-22. for Availability policy >Preemptibility: change "Off(recommended)" to "On" (this option gives us 80-90% discounted rates compared to a dedicated setup)
-[fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig05.gif)
+22. for Availability policy >Preemptibility: change "Off(recommended)" to "On"
+ (this option gives us 80-90% discounted rates compared to a dedicated setup)
+ [fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig05.gif)
 
 23. click "Create" (although it says "you will be billed for this instance" it just means it's going to be using your free credits)
 
@@ -105,18 +106,14 @@ in "Value" type dev
   A new window should pop open, saying "Connecting..."
 
 25. When it looks like it's waiting for you to type something in, copy and paste the below commands.
-To paste into the black terminal window, try right clicking the mouse to find the paste option. Other methods are to hold SHIFT and press Insert
-or CTRL SHIFT v
-If you're not using chrome, there's a chance none may work as intended, so you'll have to type them.
+ To paste into the black terminal window, try right clicking the mouse to find the paste option. Other methods are to hold SHIFT and press Insert
+   or CTRL SHIFT v
+ If you're not using chrome, there's a chance none may work as intended, so you'll have to type them.
 ```
 sudo apt install wget
 ```
- when it says Do you want to continue? [Y/n] 
+ when it says Do you want to continue? [Y/n] <br>
  press y and then ENTER 
-
-```
-wget download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb
-```
 
 ```
 sudo apt-get update
@@ -131,6 +128,9 @@ sudo apt-get install gcc make linux-headers-$(uname -r)
 ```
   Y for yes to continue
 
+```
+wget download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb
+```
 ```
 wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-x86_64-410.104.run
 
