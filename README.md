@@ -1,5 +1,5 @@
 # FoldingAtAltitude
-(get it? because we're in the cloud)
+(get it? because we're in the cloud)<br>
 A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
 
 Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding, all on linux for greater PPD. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
@@ -16,7 +16,7 @@ Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight 
 # Azure guide
   [A. sign up and upgrade](#sign-up-and-upgrade) <br>
   [B. request quota increase](#req-quota-increase) <br>
-  [C. make VM(s)](#make-vm(s)) <br>
+  [C. make VM(s)](#make-vms) <br>
   [D. prep the VM](#prep-the-vm) <br>
   [E. install / config / monitor FAH](#install--config--monitor-fah) <br>
   [F. VM restart automation](#vm-restart-automation) <br>
@@ -203,29 +203,98 @@ The End.
 Azure puts a 30-day time limit on the $200 free credits, and the clock starts ticking as soon as you sign up. So pay attention not only to your credits, but also your last free day, because if you've still got resources when your credits expire, you could start to get charged no matter how many credits you still had.
 
 ### [sign up and upgrade](#azure-guide)
+1. Go to https://azure.microsoft.com
 
+2. Click on "Portal" in the upper right corner <br>
+   Use an email address tied to a Microsoft account to log in, or alternately, click their "Create One" link to use some other email address which will associate it with a Microsoft account.
 
+3. Once signed in, fill out info and go through the text message and credit card verification processes. (Nothing gets charged) [fig 1]()
+
+4. When completed, you'll be at the Home screen [fig 2() <br>
+   Click on "Cost Management" in the lower right, then in the panel click "Go to billing account" [fig 3]()
+
+5. Top middle, click the blue UPGRADE button [fig 4]()
+
+6. Chose the Free option for a suppport plan: the No Technical Support [fig 5]() <br>
+  Then click on "Upgrade" in the lower left <br>
+  You might still see the Upgrade button at the top after you just upgraded, so just ignore it. Time to request more quotas.
+  
+  
 
 ### [Req quota increase](#azure-guide)
+We are just a couple CPU threads short of our ideal to fold with 2 P100's to burn through the $200 within 30 days, so we're going to ask for a tad more, which Azure usually grants.
 
+7. Click the hamburger and select the very bottom option (MS calls these 'blades') "Help + support"
 
+8. In the left panel click on "+ New support request"
 
+9. In Basics:
+   - The Issue type = "Service and subscription limits (quotas)"
+   - Quota type = "Compute-VM (cores-vCPUs) subscription limit increases" (it's alphabetical, so scroll down to the C's)
 
+10. Click "Next: Solutions>>" which actually takes you to Details:
+    - click the link for "Enter details" to open a right panel [fig 6](quo)
+      - Location = EastUS
+      - Type = Spot
+      - New vCPU Limit = 12
+    - click "Save and Continue" to finish the Details section
+      - Severity = keep it at C
+      - Preferred contact = choose either email or phone
+      - Click "Review + create>>"
+      - Click the blue "Create" button
+
+11. Check your email for the approval which should come within 2 minutes. 
 
 
 ### [Make VM(s)](#azure-guide)
+12. Click the CloudShell icon in the blue area at the top, the first icon right of center, looks like >_ inside a square. [fig](cli) <br>
+This guide used Bash, so select "Bash"<br>
 
+13. "You have no storage mounted," click "Create" to make it
+
+14. Once it's like this with the cursor blinking, you're ready to copy and paste the below commands into that window one at a time and hit ENTER [fig](cli2) Use the mouse to right click and paste; or the keyboard shortcut hold Shift and press Insert
+
+```
+az group create --location eastus --name myCloudFolding
+```
+"myCloudFolding" is a customizable name for your Resource Group, just remember if you change it, you have to change it for everywhere
+```
+az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --storage-sku StandardSSD_LRS
+```
+"AzureFolding" is the name of the VM, which you also can change. (the above command is about a 2 minute wait)
 
 
 
 
 ### [Prep the VM](#azure-guide)
 
+15. During this wait, from the computer you wish to monitor cloud folding with, find its IP address by visiting a website such as https://whatsmyip.org <br>
+You will need that number (I'll refer to as Your.Home.IP.Address) very soon, but first (still from your intended monitoring computer) find the FAH icon in the system tray (maybe hidden in the lower right corner), right click it and open the Advanced Control. This is FAHControl. [fig ?](control)<br>
+In the left panel at the bottom, click on "Add" which will open a configuration window for a connection to your cloud VM. Name it whatever you want, and for the password make something up unless you're already using one for your other clients (note: this is different from the passkey). [fig ?](control2)
+
+16. Back at your Azure CloudShell, if it has finished, it's displaying some text. The 2nd to last line should be "publicIpAddress":"xx.xx.xx.xx"<br>
+Take this address and put it in the Hostname/IP entry of your FahControl configuration. With all boxes filled out, click Save. (Don't lose the address yet, there's 1 more use for it.
+
+17. Back at the CloudShell, to create the firewall at the cloud and allow it to talk to your home FAHControl, copy paste
+```
+az network nsg rule create --name fah --nsg-name AzureFoldingNSG --priority 2000 --resource-group myCloudFolding --destination-port-ranges 36330 --protocol Tcp --source-address-prefixes YOUR.HOME.IP.ADDRESS
+```
+Remember, if you customized your VM or Resource Group name, make sure to use them here as well. Note that "NSG" is attached to the end of the VM name, so if you changed yours to "xxxVM," the above command must be written with xxxVMNSG. <br>
+Lastly, replace "YOUR.HOME.IP.ADDRESS" with the numbers you saved earlier from some website
+
+18. Now you can connect via SSH into your VM using CloudShell easily. Use that "publicIpAddress" to replace xxxx below
+```
+ssh xxxx
+```
+If you lost that address, you can click hamburger, scroll halfway down to "Virtual machines" and then click on your VM's name. <br>
+In the right most column is Public IP address
+
+When it makes a connection to an IP for the first time, at the prompt type the full word: yes and hit ENTER
 
 
 
 ### [Install / config / monitor FAH](#azure-guide)
-We're still in the SSH session using CloudShell. To prevent FAH from starting before we finish GPU configs, we're going to cut its Internet access using the hosts file. 
+We're now in the VM via SSH session using CloudShell. To prevent FAH from starting before we finish GPU configs, we're going to cut its Internet access using the hosts file. The below opens a text editor
 ```
 sudo nano /etc/hosts
 ```
@@ -237,8 +306,8 @@ And at the bottom of that file add in:<br>
 127.0.0.1      assign3.foldingathome.org
 127.0.0.1      assign4.foldingathome.org
 ```
-To exit nano, Ctrl x<br>
-hit y then ENTER to save
+To exit nano, hold Ctrl and press x<br>
+It asks if you want to save; press y then ENTER to save
 
 continue copy pasting commands (and if you're manually typing, TAB can autocomplete filenames)
 ```
@@ -248,7 +317,7 @@ Follow the prompts to enter in Username, Team, and Passkey (if you have them)
 
 Choose option "full" [fig ?](clientfull)
 
-Choose option "YES" for FAH automatically starting
+Choose option "YES" for FAH automatically starting<br>
 You might see some red words on screen for errors, but ignore them.
 
 Continue commands (and note that FAHClient is not the same as Fahclient)
@@ -289,12 +358,12 @@ Ctrl x then y then ENTER to save
 ```
 sudo reboot
 ```
-In 30-45 seconds this cloud client should be "Online" in your FAHControl, still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going.
+In 30-45 seconds this cloud client should be "Online" in your FAHControl, still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going.<br>
 Careful not to accidentally move the Folding Power slide bar. It took me way too long to notice that's what I had done once.
-If you need to make name/team/passkey changes and are having trouble doing it in FAHControl, SSH back in the VM and use FAHClient --send-command "options user=xxxx"
+If you need to make name/team/passkey changes and are having trouble doing it in FAHControl, SSH back in the VM and use `FAHClient --send-command "options user=xxxx"`<br>
 or team or passkey in place of user
 
-Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in, SSH in again and sudo reboot
+Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in, SSH in again and `sudo reboot`
 
 
 
@@ -344,6 +413,13 @@ About top-middle, open the date drop down and select "Custom date range" to pick
 
 ### [Azure Shutdown](#azure-guide)
 Go to your portal, https://portal.azure.com
+
+enter CloudShell via the >_ icon
+```
+az group delete -n myCloudFolding --no-wait
+```
+If you custom named your Resource Group, use that instead of myCloudFolding<br>
+press y to confirm and ENTER, and then you can close the CloudShell
 
 Click on Subscriptions (the key icon), or type subscription in the search bar.
 
