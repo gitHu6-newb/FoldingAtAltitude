@@ -1,7 +1,7 @@
 # FoldingAtAltitude  
 (get it? because we're in the cloud)<br>
 
-A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
+## A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
 
 Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
 
@@ -24,7 +24,7 @@ Take advantage of GCP's free $300 credits and Azure's $200 free credits in the f
   [G. check credits](#check-credits) <br>
   [H. Azure Shutdown](#azure-shutdown) <br>
 
-=====================================================================================
+==================================================================================
 
 ### GCP sign up and upgrade
 1. We start with a gmail account. GCP will occasionally send you emails, but you can unsubscribe. If you want to use a different gmail account, you can. Create a new gmail now if that's what you need to do.
@@ -146,19 +146,41 @@ chmod +x NVIDIA-Linux-x86_64-410.104.run
 sudo ./NVIDIA-Linux-x86_64-410.104.run
 ```
   Screen will fill with a bunch of dots before changing to a progress bar. A minute later, there will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK<br>
- [fig 7]()<br>
+ [fig 7](xerr.gif)<br>
    The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries..." just hit ENTER to continue<br>
    At "Installation... complete" Just hit ENTER for OK <br>
    You can check info on the GPU with command
 ```
 nvidia-smi 
 ```
-[fig 8]()
+[fig 8](smi1.gif)
 
 
 
 
 ### [Install / Configure / Monitor FAH](#gcp-guide)
+
+26. We're still in the same terminal. We're going to use the hosts file to cut FAH from talking on the internet during setup so that it doesn't download a Work Unit (WU) before we're ready. Copy paste (or use the editor of your choice if not nano)
+```
+sudo nano /etc/hosts
+```
+27. Copy/paste (or write out) the below text to the bottom of this hosts file<br>
+```
+127.0.0.1	assign1.foldingathome.org
+127.0.0.1	assign2.foldingathome.org
+127.0.0.1	assign3.foldingathome.org
+127.0.0.1	assign4.foldingathome.org
+```
+blah blah text
+
+skipped a line blah blah
+
+```
+code block skipped a line above and below
+```
+
+no difference in look, i bet?
+
 
 
 
