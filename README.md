@@ -1,8 +1,9 @@
-# FoldingAtAltitude
+# FoldingAtAltitude  
 (get it? because we're in the cloud)<br>
+
 A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
 
-Take advantage of GCP's free $300 credits and Azure's $200 credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding, all on linux for greater PPD. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
+Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
 
 # GCP guide
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade) <br>
@@ -242,11 +243,14 @@ We are just a couple CPU threads short of our ideal to fold with 2 P100's to bur
       - Preferred contact = choose either email or phone
       - Click "Review + create>>"
       - Click the blue "Create" button
+ 
+ (I have noticed EastUS to be the cheapest, followed by WestUS2, and in last place SouthCentralUS. After mid-July 2020 I noticed making Spot (preemptible) GPU VMs in West2 and SouthCentral got blocked or something, so you might see the same if you tried non East locations, which is why this guide focuses on East. Perhaps in the future the block will get lifted)
 
 11. Check your email for the approval which should come within 2 minutes. 
 
 
 ### [Make VM(s)](#azure-guide)
+
 12. Click the CloudShell icon in the blue area at the top, the first icon right of center, looks like >_ inside a square. [fig 7](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cli.gif) <br>
 This guide used Bash, so select "Bash"<br>
 
@@ -280,64 +284,72 @@ Take this address and put it in the Hostname/IP entry of your FahControl configu
 az network nsg rule create --name fah --nsg-name AzureFoldingNSG --priority 2000 --resource-group myCloudFolding --destination-port-ranges 36330 --protocol Tcp --source-address-prefixes YOUR.HOME.IP.ADDRESS
 ```
 Remember, if you customized your VM or Resource Group name, make sure to use them here as well. Note that "NSG" is attached to the end of the VM name, so if you changed yours to "xxxVM," the above command must be written with xxxVMNSG. <br>
-Lastly, replace "YOUR.HOME.IP.ADDRESS" with the numbers you saved earlier from some website
+Lastly, replace "YOUR.HOME.IP.ADDRESS" with the numbers you saved earlier from some website that told you your IP.
 
 18. Now you can connect via SSH into your VM using CloudShell easily. Use that "publicIpAddress" to replace xxxx below
 ```
 ssh xxxx
 ```
 If you lost that address, you can click hamburger, scroll halfway down to "Virtual machines" and then click on your VM's name. <br>
-In the right most column is Public IP address
+In the right most column will be the Public IP address
 
-When it makes a connection to an IP for the first time, at the prompt type the full word: yes and hit ENTER
+19. When it makes a connection to an IP for the first time, at the prompt type the full word: yes and hit ENTER
 
-19. We're now in the VM via SSH session using CloudShell. To get nvidia drivers working:
+ We're now in the VM via SSH session using CloudShell. To get nvidia drivers working:
 ```
-wget 
+wget us.download.nvidia.com/tesla/450.51.05/NVIDIA-Linux-x86_64-450.51.05.run
 ```
+```
+sudo apt-get update
+```
+```
+sudo apt install clinfo
+```
+```
+sudo apt-get install gcc make linux-headers-$(uname -r)
+```
+At the prompt press y then ENTER to continue
+```
+chmod +x NVIDIA-Linux-x86_64-450.51.05.run
+```
+ (if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete)<br>
+ (that command also doesn't write anything to the screen, so just continue to the next command)
+```
+sudo ./NVIDIA-Linux-x86_64-450.51.05.run
+```
+  (A bit different from GCP) Screen will fill with a bunch of dots before changing to a progress bar. A minute later... <br>
+  There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK <br>
+  It'll ask you to "install 32-bit compatible libraries?" <br>
+    Move the white over to the "No" option and then hit ENTER [fig 11](fig_nv.gif)
+  Third and final screen, "Installation... complete" Just hit ENTER for OK )
 
 
-
-
-
-20.
-21.
-22.
-23.
 
 
 ### [Install / config / monitor FAH](#azure-guide)
-19. We're still in the VM via SSH session using CloudShell. To prevent FAH from starting before we finish GPU configs, we're going to cut its Internet access using the hosts file. The below opens a text editor
+20. We're still in the VM via SSH session using CloudShell. Download FAH
 ```
-sudo nano /etc/hosts
+wget download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb
 ```
-And at the bottom of that file add in:<br>
-(make sure there's no space between the left edge and each 127...)
-```
-127.0.0.1      assign1.foldingathome.org
-127.0.0.1      assign2.foldingathome.org
-127.0.0.1      assign3.foldingathome.org
-127.0.0.1      assign4.foldingathome.org
-```
-To exit nano, hold Ctrl and press x<br>
-It asks if you want to save; press y then ENTER to save
 
-20. continue copy pasting commands (and if you're manually typing, TAB can autocomplete filenames)
+ Unlike GCP, we have more than enough CPU cores here so we don't need to mess with the hosts file.
+
+21. continue copy pasting commands (or if you're manually typing, TAB can autocomplete filenames)
 ```
 sudo dpkg -i fahclient_7.6.13_amd64.deb
 ```
 Follow the prompts to enter in Username, Team, and Passkey (if you have them)
 
-Choose option "full" [fig 11](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_clientfull.gif)
+Choose option "full" [fig 12](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_clientfull.gif)
 
 Choose option "YES" for FAH automatically starting<br>
 You might see some red words on screen for errors, but ignore them.
 
-21. Continue commands (and note that FAHClient is not the same as Fahclient)
+22. Continue commands (and note that FAHClient is not the same as Fahclient)
 ```
 FAHClient --send-pause
 ```
-22. The next commands write what you wrote back to the screen, which is how you tell it was successful
+23. The next commands write what you wrote back to the screen, which is how you tell it was successful
 ```
 FAHClient --send-command "options gpu=true"
 ```
@@ -348,35 +360,34 @@ This IP is the network from behind which you want to monitor the cloud WUs. Plen
 ```
 FAHClient --send-command "options password=YourFAHRemotePassword"
 ```
-[fig 12](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_fahcmd.gif)
-
-23. Restore the hosts file by placing a number sign (#) in front of the 4 entries you made [fig 13](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_hosts.gif)
-```
-sudo nano /etc/hosts
-```
-Ctrl x then y then ENTER to save
+[fig 13](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_fahcmd.gif)
 
 24. Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like [fig 14](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_config.gif)
 ```
 sudo nano /etc/fahclient/config.xml
 ```
+That opened the file in an editor. <br>
 you can copy paste this into the config at the proper place
 ```
   <slot id='1' type='GPU'>
     <paused v='true'/>
   </slot>
 ```
-Ctrl x then y then ENTER to save
+To exit nano, hold Ctrl and press x<br>
+It asks if you want to save; press y then ENTER to save
 
 ```
 sudo reboot
 ```
-In 30-45 seconds this cloud client should be "Online" in your FAHControl, still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going.<br>
+and close the CloudShell
+
+In 30-45 seconds this cloud client should be "Online" in your FAHControl, still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going. If you don't see the GPU slot, re-examine the `config.xml` file again, by opening CloudShell, press the up arrow key and you can ssh again to try step (24) once more.<br>
 Careful not to accidentally move the Folding Power slide bar. It took me way too long to notice that's what I had done once.
 If you need to make name/team/passkey changes and are having trouble doing it in FAHControl, SSH back in the VM and use `FAHClient --send-command "options user=xxxx"`<br>
 or team or passkey in place of user
 
-Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in for over 10 minutes, SSH in again and `sudo reboot`
+Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in for over 10 minutes, SSH in again and `sudo reboot`<br>
+How do you tell? In FAHControl there's a "Logs" tab. Every several seconds you'll see "Download X%" until you get "Download complete" so if you see it got to some % but it's been over 10 minutes with no "Download complete" or other % update, then it's stuck and needs a reboot.
 
 
 
@@ -404,7 +415,7 @@ Lastly if you ever get a stuck download, where it looks like it started download
 
 34. Select "Schedule | Link a schedule to your runbook"
 
-35. Click "Create a schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and in the figure I have it set to check every 2 hours, then click "Create" [fig 21](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto7.gif)
+35. Click "Create a new schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and in the figure I have it set to check every 2 hours, then click "Create" [fig 21](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto7.gif)
 
 36. No need for "Parameters and run settings" so just click on "OK" 
 This schedule should restart any and all VMs, even those you later create, whether it be in the same or different Resource Groups. If for some reason you need different schedules for different VMs, you can specifically target a VM by name in "Parameters and run settings."<br> Lastly, the "Jobs" blade is how you check what/when schedules have ran if you're curious.
