@@ -206,16 +206,16 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
 1. Go to https://azure.microsoft.com
 
 2. Click on "Portal" in the upper right corner <br>
-   Use an email address tied to a Microsoft account to log in, or alternately, click their "Create One" link to use some other email address which will associate it with a Microsoft account.
+   Use an email address tied to a Microsoft account to log in, or alternatively, click their "Create One" link to use some other email address which will associate it with a Microsoft account.
 
-3. Once signed in, fill out info and go through the text message and credit card verification processes. (Nothing gets charged) [fig 1]()
+3. Once signed in, fill out info and go through the text message and credit card verification processes. (Nothing gets charged) [fig 1](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_1.gif)
 
-4. When completed, you'll be at the Home screen [fig 2() <br>
-   Click on "Cost Management" in the lower right, then in the panel click "Go to billing account" [fig 3]()
+4. When completed, you'll be at the Home screen [fig 2(https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_2.gif) <br>
+   Click on "Cost Management" in the lower right, then in the panel click "Go to billing account" [fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_3.gif)
 
-5. Top middle, click the blue UPGRADE button [fig 4]()
+5. Top middle, click the blue UPGRADE button [fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_4.gif)
 
-6. Chose the Free option for a suppport plan: the No Technical Support [fig 5]() <br>
+6. Chose the Free option for a suppport plan: the No Technical Support [fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_5.gif) <br>
   Then click on "Upgrade" in the lower left <br>
   You might still see the Upgrade button at the top after you just upgraded, so just ignore it. Time to request more quotas.
   
@@ -233,7 +233,7 @@ We are just a couple CPU threads short of our ideal to fold with 2 P100's to bur
    - Quota type = "Compute-VM (cores-vCPUs) subscription limit increases" (it's alphabetical, so scroll down to the C's)
 
 10. Click "Next: Solutions>>" which actually takes you to Details:
-    - click the link for "Enter details" to open a right panel [fig 6](quo)
+    - click the link for "Enter details" to open a right panel [fig 6](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_6quo.gif)
       - Location = EastUS
       - Type = Spot
       - New vCPU Limit = 12
@@ -247,21 +247,21 @@ We are just a couple CPU threads short of our ideal to fold with 2 P100's to bur
 
 
 ### [Make VM(s)](#azure-guide)
-12. Click the CloudShell icon in the blue area at the top, the first icon right of center, looks like >_ inside a square. [fig](cli) <br>
+12. Click the CloudShell icon in the blue area at the top, the first icon right of center, looks like >_ inside a square. [fig 7](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cli.gif) <br>
 This guide used Bash, so select "Bash"<br>
 
 13. "You have no storage mounted," click "Create" to make it
 
-14. Once it's like this with the cursor blinking, you're ready to copy and paste the below commands into that window one at a time and hit ENTER [fig](cli2) Use the mouse to right click and paste; or the keyboard shortcut hold Shift and press Insert
+14. Once it's like this with the cursor blinking, you're ready to copy and paste the below commands into that window one at a time and hit ENTER [fig 8](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cli2.gif) Use the mouse to right click and paste; or the keyboard shortcut hold Shift and press Insert
 
 ```
 az group create --location eastus --name myCloudFolding
 ```
-"myCloudFolding" is a customizable name for your Resource Group, just remember if you change it, you have to change it for everywhere
+"myCloudFolding" is a customizable name for your Resource Group, just remember if you change it, you have to change it everywhere else it appears
 ```
-az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --storage-sku StandardSSD_LRS
+az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.29 --storage-sku StandardSSD_LRS
 ```
-"AzureFolding" is the name of the VM, which you also can change. (the above command is about a 2 minute wait)
+"AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process)
 
 
 
@@ -269,8 +269,8 @@ az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-key
 ### [Prep the VM](#azure-guide)
 
 15. During this wait, from the computer you wish to monitor cloud folding with, find its IP address by visiting a website such as https://whatsmyip.org <br>
-You will need that number (I'll refer to as Your.Home.IP.Address) very soon, but first (still from your intended monitoring computer) find the FAH icon in the system tray (maybe hidden in the lower right corner), right click it and open the Advanced Control. This is FAHControl. [fig ?](control)<br>
-In the left panel at the bottom, click on "Add" which will open a configuration window for a connection to your cloud VM. Name it whatever you want, and for the password make something up unless you're already using one for your other clients (note: this is different from the passkey). [fig ?](control2)
+You will need that number (I'll refer to as Your.Home.IP.Address) very soon, but first (still from your intended monitoring computer) find the FAH icon in the system tray (maybe hidden in the lower right corner), right click it and open the Advanced Control. This is FAHControl. [fig 9](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_con.gif)<br>
+In the left panel at the bottom, click on "Add" which will open a configuration window for a connection to your cloud VM. Name it whatever you want, and for the password make something up unless you're already using one for your other clients (note: this is different from the passkey). [fig 10](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_con2.gif)
 
 16. Back at your Azure CloudShell, if it has finished, it's displaying some text. The 2nd to last line should be "publicIpAddress":"xx.xx.xx.xx"<br>
 Take this address and put it in the Hostname/IP entry of your FahControl configuration. With all boxes filled out, click Save. (Don't lose the address yet, there's 1 more use for it.
@@ -291,10 +291,23 @@ In the right most column is Public IP address
 
 When it makes a connection to an IP for the first time, at the prompt type the full word: yes and hit ENTER
 
+19. We're now in the VM via SSH session using CloudShell. To get nvidia drivers working:
+```
+wget 
+```
+
+
+
+
+
+20.
+21.
+22.
+23.
 
 
 ### [Install / config / monitor FAH](#azure-guide)
-We're now in the VM via SSH session using CloudShell. To prevent FAH from starting before we finish GPU configs, we're going to cut its Internet access using the hosts file. The below opens a text editor
+19. We're still in the VM via SSH session using CloudShell. To prevent FAH from starting before we finish GPU configs, we're going to cut its Internet access using the hosts file. The below opens a text editor
 ```
 sudo nano /etc/hosts
 ```
@@ -309,22 +322,22 @@ And at the bottom of that file add in:<br>
 To exit nano, hold Ctrl and press x<br>
 It asks if you want to save; press y then ENTER to save
 
-continue copy pasting commands (and if you're manually typing, TAB can autocomplete filenames)
+20. continue copy pasting commands (and if you're manually typing, TAB can autocomplete filenames)
 ```
 sudo dpkg -i fahclient_7.6.13_amd64.deb
 ```
 Follow the prompts to enter in Username, Team, and Passkey (if you have them)
 
-Choose option "full" [fig ?](clientfull)
+Choose option "full" [fig 11](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_clientfull.gif)
 
 Choose option "YES" for FAH automatically starting<br>
 You might see some red words on screen for errors, but ignore them.
 
-Continue commands (and note that FAHClient is not the same as Fahclient)
+21. Continue commands (and note that FAHClient is not the same as Fahclient)
 ```
 FAHClient --send-pause
 ```
-The next commands write what you wrote back to the screen, which is how you tell it was successful
+22. The next commands write what you wrote back to the screen, which is how you tell it was successful
 ```
 FAHClient --send-command "options gpu=true"
 ```
@@ -335,19 +348,19 @@ This IP is the network from behind which you want to monitor the cloud WUs. Plen
 ```
 FAHClient --send-command "options password=YourFAHRemotePassword"
 ```
-[fig ?](fahcmd)
+[fig 12](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_fahcmd.gif)
 
-Restore the hosts file by placing a number sign (#) in front of the 4 entries you made [fig ?](hosts)
+23. Restore the hosts file by placing a number sign (#) in front of the 4 entries you made [fig 13](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_hosts.gif)
 ```
 sudo nano /etc/hosts
 ```
 Ctrl x then y then ENTER to save
 
-Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like [fig ?](config)
+24. Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like [fig 14](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_config.gif)
 ```
 sudo nano /etc/fahclient/config.xml
 ```
-you can copy paste this into the config
+you can copy paste this into the config at the proper place
 ```
   <slot id='1' type='GPU'>
     <paused v='true'/>
@@ -363,39 +376,38 @@ Careful not to accidentally move the Folding Power slide bar. It took me way too
 If you need to make name/team/passkey changes and are having trouble doing it in FAHControl, SSH back in the VM and use `FAHClient --send-command "options user=xxxx"`<br>
 or team or passkey in place of user
 
-Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in, SSH in again and `sudo reboot`
+Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in for over 10 minutes, SSH in again and `sudo reboot`
 
 
 
 
 
 ### [VM restart automation](#azure-guide)
-After running my own and 2 other family members' accounts, a GPU spot VM has never been evicted, and only 1 cpu-folding VM has been evicted only once, so this section is almost unecessary if you monitor through FAHControl regularly, but here it is anyway.
 
-Type auto in the search bar at the top in the blue area and click on "Automation Accounts"
+25. Type auto in the search bar at the top in the blue area and click on "Automation Accounts" [fig 15](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto1.gif)
 
-Add/Create an Automation Account and fill in the info. Name: you creative (I named mine autobot), but the rest need to be chosen from their respective drop down menus, corresponding to the VM you made earlier. i.e. using the vm command from the beginning as an example, that would make Resource group = myCloudFolding and Location = East US. Then click Create
+26. Add/Create an Automation Account and fill in the info. Name: you create (I named mine autobot), but the rest need to be chosen from their respective drop down menus, corresponding with the VM you made earlier, i.e. using the vm command from the beginning as an example, that would make Resource group = myCloudFolding and Location = East US. Then click Create
 
-When it lists your automation account, clicking on it opens a panel, then 12th item down click on Runbooks gallery [fig ?](auto2)
+27. When it lists your automation account, clicking on it opens a panel, then 12th item down click on Runbooks gallery [fig 16](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto2.gif)
 
-Click on "Start Azure V2 VMs" and then click on "Import" and OK [fig ?](auto3)
+28. Click on "Start Azure V2 VMs" and then click on "Import" and OK [fig 17](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto3.gif)
 
-After importing it, click back to your automation Runbook gallery [fig ?](auto4)
+29. After importing it, click back to your automation Runbook gallery [fig 18](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto4.gif)
 
-Now click on "Runbooks" and then the new "StartAzureV2Vm" [fig ?](auto5)
+30. Now click on "Runbooks" and then the new "StartAzureV2Vm" [fig 19](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto5.gif)
 
-Along the top, click on the "Edit" button
+31. Along the top, click on the "Edit" button
 
-Then click on the "Publish" button [fig ?](auto6), confirm "Yes"
+32. Then click on the "Publish" button [fig 20](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto6.gif), confirm "Yes"
 
-In the panel, click on Schedules, then "Add a schedule"
+33. In the panel, click on Schedules, then "Add a schedule"
 
-Select "Schedule | Link a schedule to your runbook"
+34. Select "Schedule | Link a schedule to your runbook"
 
-"Create a schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and in the figure I have it set to check every 2 hours, then click "Create" [fig ?](auto7)
+35. Click "Create a schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and in the figure I have it set to check every 2 hours, then click "Create" [fig 21](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto7.gif)
 
-No need for "Parameters and run settings" so just click on "OK" 
-This schedule should restart any and all VMs, even those you later create, whether it be in the same or different Resource Groups. If for some reason you need different schedules for different VMs, you can specifically target names in "Parameters and run settings." Lastly, the "Jobs" blade is how you check what/when schedules have ran if you're curious.
+36. No need for "Parameters and run settings" so just click on "OK" 
+This schedule should restart any and all VMs, even those you later create, whether it be in the same or different Resource Groups. If for some reason you need different schedules for different VMs, you can specifically target a VM by name in "Parameters and run settings."<br> Lastly, the "Jobs" blade is how you check what/when schedules have ran if you're curious.
 
 
 
@@ -403,27 +415,30 @@ This schedule should restart any and all VMs, even those you later create, wheth
 
 
 ### [Check credits](#azure-guide)
-From the home screen, click on "Cost Management," or click the hamburger and almost at the bottom is Cost Management -- Careful, the bar displaying your credits here only focuses on the current month, and it is NOT a running total
+37. From the home screen, click on "Cost Management," or click the hamburger and almost at the bottom is Cost Management -- Careful, the bar displaying your credits there only focuses on the current month, and it is NOT a running total
 
-A couple blades down in the left panel, click on the "Cost Analysis" blade. 
+38. A couple blades down in the left panel, click on the "Cost Analysis" blade. 
 
-About top-middle, open the date drop down and select "Custom date range" to pick your start day (or before it) to make sure you get your true cumulative total. In the following figure, the solid green is the cost spent per day, and the light green being projected costs. Here I realized well past the halfway point that I was well under spending $200 in 30 days, by about $40, so I spun up an identical VM. The projection can only be accurate if it has 7 days of steady history to work with, and at the end there on the 19th I have used up that $40 so I deleted that VM, but that change is too soon for the projection to make accurate predictions. Paper math says it'll perfectly work out though, with the 20th ending at $194.30 and my last day less than 199.50, depending on how early I end it synchronized with the WUs.
-[fig ?]()
+39. About top-middle, open the date drop down and select "Custom date range" to pick your start day (or before it) to make sure you get your true cumulative total. [fig 22](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cm.gif) <br>
+In that figure, the solid green is the cost already spent, and the light green is the projected cost. The Azure algorithm will need 7 days of history to make accurate projections, so any changes will take days to stabilize projections. My typical price for 1 NC6s_v2 P100 VM was $5.22 per day, and that would leave quite a bit of unused credits after 30 days, so spinning up a 2nd NC6s_v2 VM for 7 - 8 days solves that problem, assuming your average prices are similar to mine. (Or if you start up with 2 VMs off the bat and keep going with them, that's about 18 and a half days you can run them without incurring charges.
+
+_Important Note_: Azure Billing seems to go by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th, if you're USA West coast anything you use past 5pm on the 29th will be invoiced after your credits have expired.
+
 
 
 ### [Azure Shutdown](#azure-guide)
-Go to your portal, https://portal.azure.com
+40. Go to your portal, https://portal.azure.com
 
-enter CloudShell via the >_ icon
+41. enter CloudShell via the >_ icon
 ```
 az group delete -n myCloudFolding --no-wait
 ```
 If you custom named your Resource Group, use that instead of myCloudFolding<br>
 press y to confirm and ENTER, and then you can close the CloudShell
 
-Click on Subscriptions (the key icon), or type subscription in the search bar.
+42. Click on Subscriptions (the key icon), or type subscription in the search bar.
 
-Click on your subscription name, then at the top you can click on "Cancel subscription" and follow the instruction to type something to confirm.
+43. Click on your subscription name, then at the top you can click on "Cancel subscription" and follow the instruction to type something to confirm.
 
-Hopefully you have enough time to use "Finish" on your FAHControl first to complete all current work units, as opposed to rushing to terminate before you start accruing charges :)
+Hopefully you have had enough time to use "Finish" on your FAHControl first to complete all current work units, as opposed to rushing to terminate before you start accruing charges :)
 
