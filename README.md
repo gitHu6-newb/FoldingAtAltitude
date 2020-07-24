@@ -238,14 +238,14 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
 
 5. Top middle, click the blue UPGRADE button [fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_4.gif)
 
-6. Chose the Free option for a suppport plan: the No Technical Support [fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_5.gif) <br>
+6. Chose the Free option for a suppport plan: the "No Technical Support" [fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_5.gif) <br>
   Then click on "Upgrade" in the lower left <br>
   You might still see the Upgrade button at the top after you just upgraded, so just ignore it. Time to request more quotas.
   
   
 
 ### [Req quota increase](#azure-guide)
-We are just a couple CPU threads short of our ideal to fold with 2 P100's to burn through the $200 within 30 days, so we're going to ask for a tad more, which Azure usually grants.
+We are just a couple CPU threads short of our ideal to fold with 2 P100's to burn through the $200 within 30 days if you are lucky enough to have consistently low pricing, so we're going to ask for a tad more, which Azure usually grants, just so that option is readily available should you need it.
 
 7. Click the hamburger and select the very bottom option (MS calls these 'blades') "Help + support"
 
@@ -278,16 +278,17 @@ This guide used Bash, so select "Bash"<br>
 
 13. "You have no storage mounted," click "Create" to make it
 
-14. Once it's like this with the cursor blinking, you're ready to copy and paste the below commands into that window one at a time and hit ENTER [fig 8](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cli2.gif) Use the mouse to right click and paste; or the keyboard shortcut hold Shift and press Insert
+14. Once it's like this with the cursor blinking, you're ready to copy and paste the below commands into that window one at a time and hit ENTER [fig 8](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cli2.gif) Use the mouse to right click and paste; or the keyboard shortcut: hold Shift and press Insert
 
 ```
 az group create --location eastus --name myCloudFolding
 ```
-"myCloudFolding" is a customizable name for your Resource Group, just remember if you change it, you have to change it everywhere else it appears
+"myCloudFolding" is a customizable name for your Resource Group, just remember if you change it, you'll have to change it everywhere else it appears
 ```
-az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.29 --storage-sku StandardSSD_LRS
+az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.32051 --storage-sku StandardSSD_LRS
 ```
-"AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process)
+"AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process) <br>
+"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in 4 days). Reasonable pricing is around 22 cents/hr, so worst case scenario if it rides just under the max price all month, make sure you check credits at least once, 24 days after you started to make sure you don't go over the limit the following day if this happens to be the case.
 
 
 
@@ -448,14 +449,20 @@ This schedule should restart any and all VMs, even those you later create, wheth
 
 
 ### [Check credits](#azure-guide)
-37. From the home screen, click on "Cost Management," or click the hamburger and almost at the bottom is Cost Management -- Careful, the bar displaying your credits there only focuses on the current month, and it is NOT a running total
+37. From the home screen, click on "Cost Management," or click the hamburger and almost at the bottom is Cost Management -- Careful, the bar displaying your credits there only focuses on the current month, and it is NOT a running total, so if you cross over into a new month, watch out for that.
 
 38. A couple blades down in the left panel, click on the "Cost Analysis" blade. 
 
 39. About top-middle, open the date drop down and select "Custom date range" to pick your start day (or before it) to make sure you get your true cumulative total. [fig 22](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cm.gif) <br>
-In that figure, the solid green is the cost already spent, and the light green is the projected cost. The Azure algorithm will need 7 days of history to make accurate projections, so any changes will take days to stabilize projections. My typical price for 1 NC6s_v2 P100 VM was $5.22 per day, and that would leave quite a bit of unused credits after 30 days, so spinning up a 2nd NC6s_v2 VM for 7 - 8 days solves that problem, assuming your average prices are similar to mine. (Or if you start up with 2 VMs off the bat and keep going with them, that's about 18 and a half days you can run them without incurring charges.
-
-_Important Note_: Azure Billing seems to go by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th, if you're USA West coast anything you use past 5pm on the 29th will be invoiced after your credits have expired.
+In that figure, the solid green is the cost already spent, and the light green is the projected cost. The Azure algorithm will need 7 days of history to make accurate projections, so any changes will take days to stabilize projections. My typical price for 1 NC6s_v2 P100 VM was $5.22 per day, and that would leave quite a bit of unused credits after 30 days, so spinning up a 2nd NC6s_v2 VM for 7 - 8 days solves that problem, assuming your average prices are similar to mine. (Or if you start up with 2 VMs off the bat and keep going with them, that's about 18 and a half days you can run them without incurring charges, assuming steady and low prices... but that won't always be the case, so it might be a good idea to set up Budget Alerts to send yourself an email when you pass a certain threshold.
+  -  Budgets (right underneath the Cost Analysis blade in the panel)
+     - "+ Add" button near top
+     - Reset period: I'd go with "Yearly" to avoid the costs resetting if you cross-over a month or a quarter
+     - Put in your budget of 200
+     - The next page you can set the alert thresholds, as many as you want, i.e. at 25%, 50%, 75%, 90%, 95%, and 100%
+     - Enter the email at which you wish to receive these alerts.
+     
+_Important Note_: Azure Billing seems to go by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th, if you're USA West coast (UTC-7) anything you use past 5pm on the 29th will be invoiced after your credits have expired.
 
 
 
