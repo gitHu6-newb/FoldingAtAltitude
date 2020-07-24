@@ -1,4 +1,4 @@
-# FoldingAtAltitude  
+# FoldingAtAltitude  (still under construction)
 (get it? because we're in the cloud)<br>
 
 ### A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
@@ -299,7 +299,7 @@ You will need that number (I'll refer to as Your.Home.IP.Address) very soon, but
 In the left panel at the bottom, click on "Add" which will open a configuration window for a connection to your cloud VM. Name it whatever you want, and for the password make something up unless you're already using one for your other clients (note: this is different from the passkey). [fig 10](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_con2.gif)
 
 16. Back at your Azure CloudShell, if it has finished, it's displaying some text. The 2nd to last line should be "publicIpAddress":"xx.xx.xx.xx"<br>
-Take this address and put it in the Hostname/IP entry of your FahControl configuration. With all boxes filled out, click Save. (Don't lose the address yet, there's 1 more use for it.
+Take this address and put it in the Hostname/IP entry of your FahControl configuration. With all boxes filled out, click Save. (Don't lose the address yet, there's 1 more use for it.)
 
 17. Back at the CloudShell, to create the firewall at the cloud and allow it to talk to your home FAHControl, copy paste
 ```
@@ -342,7 +342,7 @@ sudo ./NVIDIA-Linux-x86_64-450.51.05.run
   (A bit different from GCP) Screen will fill with a bunch of dots before changing to a progress bar. A minute later... <br>
   There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK <br>
   It'll ask you to "install 32-bit compatible libraries?" <br>
-    Move the white over to the "No" option and then hit ENTER [fig 11](fig_nv.gif)
+    Move the white over to the "No" option and then hit ENTER [fig 11](fig_nv.gif) <br>
   Third and final screen, "Installation... complete" Just hit ENTER for OK )
 
 
@@ -371,7 +371,7 @@ You might see some red words on screen for errors, but ignore them.
 ```
 FAHClient --send-pause
 ```
-23. The next commands write what you wrote back to the screen, which is how you tell it was successful
+23. The next commands write what you wrote back to the screen, which is how you tell it was successful [fig 13](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_fahcmd.gif)
 ```
 FAHClient --send-command "options gpu=true"
 ```
@@ -382,9 +382,9 @@ This IP is the network from behind which you want to monitor the cloud WUs. Plen
 ```
 FAHClient --send-command "options password=YourFAHRemotePassword"
 ```
-[fig 13](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_fahcmd.gif)
 
-24. Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like [fig 14](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_config.gif)
+24. Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like <br>
+[fig 14](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_config.gif)
 ```
 sudo nano /etc/fahclient/config.xml
 ```
