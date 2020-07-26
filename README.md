@@ -35,7 +35,7 @@ Sign in, fill out the credit card verification, and make sure to create the INDI
 3. After finishing sign up, click on "Compute Engine" [fig 2](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig02.jpg)
 This will take some minutes for GCP to initialize on their backend.
 
-4. When that's done, click the the top left corner 'hamburger,' which is the 3 horizontal lines to open the Navigation Menu. Let's pin commonly used items to the top of the menu. Scroll down and look for "Compute Engine," and click on the 'push-pin' that appears when you mouse over the space to the left of the '>' which should pin Compute Engine to the top the menu. Now scroll about 40 items down into the TOOLS section to pin "Cloud Scheduler." Now scroll back up and just click on "Billing."
+4. When that's done, click the the top left corner 'hamburger,' the 3 little horizontal lines, to open the Navigation Menu. Let's pin commonly used items to the top of the menu. Scroll down and look for "Compute Engine," and click on the 'push-pin' that appears when you mouse over the space to the left of the '>' which should pin Compute Engine to the top the menu. Now scroll about 40 items down into the TOOLS section to pin "Cloud Scheduler." Now scroll back up and just click on "Billing."
 
 5. On the right side of the Billing page, under the circular graphic displaying your credits, click on the button to Upgrade your account.
 This could take a minute or two to take effect. You will receive an email saying "You've Upgraded." You can ignore it
@@ -46,14 +46,14 @@ This could take a minute or two to take effect. You will receive an email saying
 
 7. Along the top there is a single 'filter table' drop down menu. Click it and type GPU
 
-8. select the result for "GPUs (all regions)" which will list a Compute Engine API on the page. Mark its checkbox then click on "Edit Quotas" that's above it.
+8. select the result for "GPUs (all regions)" which will list the Compute Engine API on the page. Mark its checkbox then click on "Edit Quotas" that's above it.
 
 9. fill out your information in the open pane on the right and click next (any phone number will do). <br>
-  I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. filter the quotas by 'preemptible' this time, and select the one with T4. Then filter by location and choose either central1, east1 or west1. 
+  I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. filter the quotas by 'preemptible' this time, and select the one with T4. Then filter by location and choose either central1, east1 or west1 to request 4. 
 
 10. in the box for New Quota Limit for the GPUs (all Regions), you can try 4 if you're hopeful, otherwise just put 1. 
 
-11. for the reason, write anyhing, like helping with Folding@Home, then submit request
+11. For the reason, write something like helping with Folding@Home, then submit request
 
 12. Your email will say you'll get your answer within 2 business days, but most likey it will arrive in under 2 minutes. If you tried for 4 and get denied, request again, but this time just for 1 and it should get approved.
 
@@ -138,8 +138,8 @@ wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-x86_64-410.104.run
 
 chmod +x NVIDIA-Linux-x86_64-410.104.run
 ```
- if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete<br>
- (that command also doesn't output anything, so just continue to next command)<br>
+ if you're typing this one out, after you write 'N' you can hit TAB and it will autocomplete<br>
+ (that chmod command also doesn't output anything, so just continue to the next command)<br>
  (also-also, if you opted for P100 instead of T4, you might be better off with this driver us.download.nvidia.com/tesla/450.51.05/NVIDIA-Linux-x86_64-450.51.05.run )
 
 ```
@@ -160,26 +160,109 @@ nvidia-smi
 
 ### [Install / Configure / Monitor FAH](#gcp-guide)
 
-26. We're still in the same terminal. We're going to use the hosts file to cut FAH from talking on the internet during setup so that it doesn't download a Work Unit (WU) before we're ready. Copy paste (or use the editor of your choice if not nano)
+26. We're still in the same terminal. We're going to use the hosts file to cut FAH from talking on the internet during setup so that it doesn't download a Work Unit (WU) before we're ready. Copy paste (or use the editor of your choice if not nano) to edit the hosts file
 ```
 sudo nano /etc/hosts
 ```
-27. Copy/paste (or write out) the below text to the bottom of this hosts file<br>
+27. Copy/paste (or write out) the below text to the bottom of your hosts file<br>
 ```
-127.0.0.1	assign1.foldingathome.org
-127.0.0.1	assign2.foldingathome.org
-127.0.0.1	assign3.foldingathome.org
-127.0.0.1	assign4.foldingathome.org
+127.0.0.1	    assign1.foldingathome.org
+127.0.0.1	    assign2.foldingathome.org
+127.0.0.1	    assign3.foldingathome.org
+127.0.0.1	    assign4.foldingathome.org
 ```
-blah blah text
+press Ctrl x to exit nano, <br>
+press y for yes to save,<br>
+press ENTER to overwrite that filename
 
-skipped a line blah blah
-
 ```
-code block skipped a line above and below
+sudo dpkg -i fahclient_7.6.13_amd64.deb
+```
+if you're typing these out, after you type 'f' you can hit TAB and it will autocomplete
+
+28. Follow the prompts to fill out a FAH username, team #, and passkey (if you have it)<br>
+Choose option 'full' [fig 9](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_clientfull.gif)
+
+29. There might be some "failures" on screen; don't worry. Continue with the below commands:
+```
+FAHClient --send-pause
 ```
 
-no difference in look, i bet?
+The next ones will echo your values back to the screen, meaning all is good [fig 10](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig07.gif)
+```
+FAHClient --send-command "options gpu=true"
+```
+```
+FAHClient --send-command "options allow=YOUR.HOME.IP.ADDRESS"
+```
+ (i.e. if you're going to monitor the cloud FAH from a device in your home network, then use any device in your network to visit a website that tells you what your IP address is. Such as https://whatsmyip.org Then enter that IP in place of Your.Home.IP.Address)
+```
+FAHClient --send-command "options password=YourRemoteControlPassword"
+```
+Note: this is not the same as the Passkey. If you've already been using remote monitoring, you know what goes here; otherwise just make up a password now
+
+30. Restore the hosts file by placing a # in front of the 4 lines you added so that it now looks like
+```
+#127.0.0.1     assign1.foldingathome.org
+#127.0.0.1     assign2.foldingathome.org
+#127.0.0.1     assign3.foldingathome.org
+#127.0.0.1     assign4.foldingathome.org
+```
+
+the command was 
+```
+sudo nano /etc/hosts
+```
+Ctrl x to exit, Y and ENTER to save
+
+
+31. Now we fix the config file of FAH
+```
+sudo nano /etc/fahclient/config.xml
+```
+ the bottom of that file looks like: 
+```
+  <!-- Folding Slots -->
+  <slot id='0' type='CPU'>
+    <paused v='true'/>
+  </slot>
+</config>
+```
+ We want it to look like: [fig 11](config.gif) <br>
+ (Just change the 0 to 1 and the C in CPU to a G
+```
+  <!-- Folding Slots -->
+  <slot id='1' type='GPU'>
+    <paused v='true'/>
+  </slot>
+</config>
+```
+ Cntl x to exit, Y then ENTER to save 
+ 
+```
+sudo reboot
+```
+
+32. You can close the terminal window now (Cntl d)
+
+33. Add a Firewall Rule: (Still on the Compute Engine page), click on bottom row for "Setup Firewall Rules"
+
+34. click "CREATE FIREWALL RULE"
+	a) Name: fah
+	b) Scroll down to Targets: choose "All instances in the network"
+	c) Source filter: "IP ranges"
+	d) Source IP ranges: enter IP address that was used in step (19), and any additional if needed
+	e) check box for: tcp: and enter in 36330
+	f) click "CREATE"
+
+
+
+
+
+
+
+
+
 
 
 
