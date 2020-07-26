@@ -248,13 +248,13 @@ sudo reboot
 
 33. Add a Firewall Rule: (Still on the Compute Engine page), click on bottom row for "Setup Firewall Rules"
 
-34. click "CREATE FIREWALL RULE"
-	a) Name: fah
-	b) Scroll down to Targets: choose "All instances in the network"
-	c) Source filter: "IP ranges"
-	d) Source IP ranges: enter IP address that was used in step (19), and any additional if needed
-	e) check box for: tcp: and enter in 36330
-	f) click "CREATE"
+34. click "CREATE FIREWALL RULE"<br>
+`     `	a) Name: fah<br>
+`     `	b) Scroll down to Targets: choose "All instances in the network"<Br>
+`     `	c) Source filter: "IP ranges"<br>
+`     `	d) Source IP ranges: enter IP address that was used in step (19), and any additional if needed<br>
+`     `	e) check box for: tcp: and enter in 36330<br>
+`     `	f) click "CREATE"
 
 
 
