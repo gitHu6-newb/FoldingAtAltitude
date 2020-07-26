@@ -228,7 +228,7 @@ sudo nano /etc/fahclient/config.xml
   </slot>
 </config>
 ```
- We want it to look like: [fig 11](config.gif) <br>
+ We want it to look like: [fig 11](/media/fig_config.gif) <br>
  (Just change the 0 to 1 and the C in CPU to a G
 ```
   <!-- Folding Slots -->
