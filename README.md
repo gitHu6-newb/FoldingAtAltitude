@@ -30,9 +30,9 @@ Take advantage of GCP's free $300 credits and Azure's $200 free credits in the f
 1. We start with a gmail account. GCP will occasionally send you emails, but you can unsubscribe. If you want to use a different gmail account, you can. Create a new gmail now if that's what you need to do.
 
 2. Then go to https://console.cloud.google.com
-Sign in, fill out the credit card verification, and make sure to create the INDIVIDUAL account, (not the business one). [fig 1](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig01.gif) (GCP will send some emails, like "Account confirmation - Complete your GCP Profile" but you can ignore all these b/c it's just checkboxes for your interests in order to send you more mail)
+Sign in, fill out the credit card verification, and make sure to create the INDIVIDUAL account, (not the business one). [fig 1](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/fig01.gif) (GCP will send some emails, like "Account confirmation - Complete your GCP Profile" but you can ignore all these b/c it's just checkboxes for your interests in order to send you more mail)
 
-3. After finishing sign up, click on "Compute Engine" [fig 2](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig02.jpg)
+3. After finishing sign up, click on "Compute Engine" [fig 2](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/fig02.jpg)
 This will take some minutes for GCP to initialize on their backend.
 
 4. When that's done, click the the top left corner 'hamburger,' the 3 little horizontal lines, to open the Navigation Menu. Let's pin commonly used items to the top of the menu. Scroll down and look for "Compute Engine," and click on the 'push-pin' that appears when you mouse over the space to the left of the '>' which should pin Compute Engine to the top the menu. Now scroll about 40 items down into the TOOLS section to pin "Cloud Scheduler." Now scroll back up and just click on "Billing."
@@ -72,7 +72,7 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)<br>
   change the number of Cores to 1<br>
   change the Memory to 1.75<br>
- [fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/fig_03.gif)
+ [fig 3](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/media/fig_03.gif)
 
 18. Click "CPU platform and GPU" then click on "Add GPU"<br>
  GPU type: select T4 (if selection not present, you'll have to change Zone from step (6))<br>
@@ -85,15 +85,15 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 
 21. scroll down to Metadata, then in "Key" type env<br>
  in "Value" type dev<br>
- [fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig04.gif)
+ [fig 4](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/fig04.gif)
 
 22. for Availability policy >Preemptibility: change "Off(recommended)" to "On"<br>
  (this option gives us 80-90% discounted rates compared to a dedicated setup)<br>
- [fig 5](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig05.gif)
+ [fig 5](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/fig05.gif)
 
 23. click "Create" (although it says "you will be billed for this instance" it just means it's going to be using your free credits)
 
-  Once you see a green circle check mark ![image](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpupgr/greenchk.gif) next to the name, the VM is running and ready.
+  Once you see a green circle check mark ![green circle image](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/greenchk.gif) next to the name, the VM is running and ready.
 
 
 
@@ -103,7 +103,7 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 
 ### [Prepare the VM](#gcp-guide)
 24. (The VM must be running, indicated by the green circle). On the right end of the table, click on "SSH" (the actual box that says SSH, not the drop down menu)
-[fig 6](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig06.gif)
+[fig 6](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/gfrmedia/fig06.gif)
 
   A new window should pop open, saying "Connecting..."
 
@@ -146,14 +146,14 @@ chmod +x NVIDIA-Linux-x86_64-410.104.run
 sudo ./NVIDIA-Linux-x86_64-410.104.run
 ```
   Screen will fill with a bunch of dots before changing to a progress bar. A minute later, there will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK<br>
- [fig 7](xerr.gif)<br>
+ [fig 7](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/media/fig_xerr.gif)<br>
    The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries..." just hit ENTER to continue<br>
    At "Installation... complete" Just hit ENTER for OK <br>
-   You can check info on the GPU with command
+   Optional: You can check info on the GPU with command
 ```
 nvidia-smi 
 ```
-[fig 8](smi1.gif)
+[fig 8](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/media/fig_smi1.gif)
 
 
 
@@ -181,7 +181,7 @@ sudo dpkg -i fahclient_7.6.13_amd64.deb
 if you're typing these out, after you type 'f' you can hit TAB and it will autocomplete
 
 28. Follow the prompts to fill out a FAH username, team #, and passkey (if you have it)<br>
-Choose option "full" [fig 9](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_clientfull.gif)<br>
+Choose option "full" [fig 9](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/media/fig_clientfull.gif)<br>
 Choose option "yes" for auto starts
 
 29. There might be some "failures" on screen; don't worry. Continue with the below commands:
@@ -189,7 +189,7 @@ Choose option "yes" for auto starts
 FAHClient --send-pause
 ```
 
-The next ones will echo your values back to the screen, meaning all is good [fig 10](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/gcpfree/fig07.gif)
+The next ones will echo your values back to the screen, meaning all is good [fig 10](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/fig07.gif)
 ```
 FAHClient --send-command "options gpu=true"
 ```
