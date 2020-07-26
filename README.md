@@ -181,7 +181,8 @@ sudo dpkg -i fahclient_7.6.13_amd64.deb
 if you're typing these out, after you type 'f' you can hit TAB and it will autocomplete
 
 28. Follow the prompts to fill out a FAH username, team #, and passkey (if you have it)<br>
-Choose option 'full' [fig 9](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_clientfull.gif)
+Choose option "full" [fig 9](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_clientfull.gif)<br>
+Choose option "yes" for auto starts
 
 29. There might be some "failures" on screen; don't worry. Continue with the below commands:
 ```
@@ -228,7 +229,7 @@ sudo nano /etc/fahclient/config.xml
   </slot>
 </config>
 ```
- We want it to look like: [fig 11](/media/fig_config.gif) <br>
+ We want it to look like: [fig 11](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/media/fig_config.gif) <br>
  (Just change the 0 to 1 and the C in CPU to a G
 ```
   <!-- Folding Slots -->
@@ -237,7 +238,7 @@ sudo nano /etc/fahclient/config.xml
   </slot>
 </config>
 ```
- Cntl x to exit, Y then ENTER to save 
+ Ctrl x to exit, Y then ENTER to save 
  
 ```
 sudo reboot
@@ -316,7 +317,7 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
 
 3. Once signed in, fill out info and go through the text message and credit card verification processes. (Nothing gets charged) [fig 1](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_1.gif)
 
-4. When completed, you'll be at the Home screen [fig 2(https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_2.gif) <br>
+4. When completed, you'll be at the Home screen [fig 2](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_2.gif) <br>
    Click on "Cost Management" in the lower right, then in the panel click "Go to billing account" [fig 3](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_3.gif)
 
 5. Top middle, click the blue UPGRADE button [fig 4](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_4.gif)
