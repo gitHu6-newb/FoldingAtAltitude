@@ -252,11 +252,11 @@ sudo reboot
 `     `	a) Name: fah<br>
 `     `	b) Scroll down to Targets: choose "All instances in the network"<Br>
 `     `	c) Source filter: "IP ranges"<br>
-`     `	d) Source IP ranges: enter IP address that was used in step (19), and any additional if needed<br>
-`     `	e) check box for: tcp: and enter in 36330<br>
+`     `	d) Source IP ranges: enter IP address that was used in step (29), and any additional if needed<br>
+`     `	e) check the box for "tcp:" and enter in 36330<br>
 `     `	f) click "CREATE"
 
-
+35. 
 
 
 
