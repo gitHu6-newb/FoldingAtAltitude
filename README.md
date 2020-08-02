@@ -357,7 +357,8 @@ We are just a couple CPU threads short of our ideal to fold with 2 P100's to bur
 
 ### [Make VM(s)](#azure-guide)
 
-12. Click the CloudShell icon in the blue area at the top, the first icon right of center, looks like >_ inside a square. [fig 7](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cli.gif) <br>
+12. Click the CloudShell icon in the blue area at the top, the first icon right of center, looks like >_ inside a square. <br>
+[fig 7](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cli.gif) <br>
 This guide used Bash, so select "Bash"<br>
 
 13. "You have no storage mounted," click "Create" to make it
@@ -369,10 +370,10 @@ az group create --location eastus --name myCloudFolding
 ```
 "myCloudFolding" is a customizable name for your Resource Group, just remember if you change it, you'll have to change it everywhere else it appears
 ```
-az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.32051 --storage-sku StandardSSD_LRS
+az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.30 --storage-sku StandardSSD_LRS
 ```
 "AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process) <br>
-"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in 4 days). Reasonable pricing is around 22 cents/hr, so worst case scenario if it rides just under the max price all month, make sure you check credits at least once, 24 days after you started to make sure you don't go over the limit the following day if this happens to be the case.
+"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days). Reasonable pricing is around 22 cents/hr, so worst case scenario this rides just under the max price all month, so *make sure you check credits at least once, 4 days before your 30-day expiration date to make sure you don't go over the limit.*
 
 
 
@@ -412,6 +413,7 @@ sudo apt-get update
 ```
 sudo apt install clinfo
 ```
+At the prompt press y then ENTER to continue
 ```
 sudo apt-get install gcc make linux-headers-$(uname -r)
 ```
@@ -427,8 +429,8 @@ sudo ./NVIDIA-Linux-x86_64-450.51.05.run
   (A bit different from GCP) Screen will fill with a bunch of dots before changing to a progress bar. A minute later... <br>
   There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK <br>
   It'll ask you to "install 32-bit compatible libraries?" <br>
-    Move the white over to the "No" option and then hit ENTER [fig 11](fig_nv.gif) <br>
-  Third and final screen, "Installation... complete" Just hit ENTER for OK )
+    Move the white over to the "No" option and then hit ENTER [fig 11](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_nv.gif) <br>
+  Finally, "Installation... complete" Just hit ENTER for OK )
 
 
 
@@ -456,14 +458,14 @@ You might see some red words on screen for errors, but ignore them.
 ```
 FAHClient --send-pause
 ```
-23. The next commands write what you wrote back to the screen, which is how you tell it was successful [fig 13](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_fahcmd.gif)
+23. The next commands return what you write back to the screen, which is how you tell it was successful [fig 13](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_fahcmd.gif)
 ```
 FAHClient --send-command "options gpu=true"
 ```
 ```
 FAHClient --send-command "options allow=YOUR.HOME.IP.ADDRESS"
 ```
-This IP is the network from behind which you want to monitor the cloud WUs. Plenty of sites will tell you your IP, like https://www.whatsmyip.org/
+This IP is the network from behind which you want to monitor the cloud FAH. Plenty of sites will tell you your IP, like https://www.whatsmyip.org/
 ```
 FAHClient --send-command "options password=YourFAHRemotePassword"
 ```
@@ -489,9 +491,14 @@ sudo reboot
 and close the CloudShell
 
 In 30-45 seconds this cloud client should be "Online" in your FAHControl, still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going. If you don't see the GPU slot, re-examine the `config.xml` file again, by opening CloudShell, press the up arrow key and you can ssh again to try step (24) once more.<br>
-Careful not to accidentally move the Folding Power slide bar. It took me way too long to notice that's what I had done once.
+Careful not to accidentally move the Folding Power slide bar away from "full." It took me way too long to notice that's what I had done once.
 If you need to make name/team/passkey changes and are having trouble doing it in FAHControl, SSH back in the VM and use `FAHClient --send-command "options user=xxxx"`<br>
 or team or passkey in place of user
+
+Just in case somebody forgoes a monitoring program, that person would have to SSH in again to take FAH off the pause state with `FAHClient --send-unpause`<br>
+The current logfile would be then viewed with `watch tail /var/lib/fahclient/log.txt` <br>
+Then wait for the progress %'s to start climbing for BOTH lines that have 0xa7 and 0x22 in them for decent confidence that all is working.<br>
+Every 2 - 6 hrs a WU should complete, which you can check by entering the name you picked at https://apps.foldingathome.org/cpu (typical delay ~ 10 min)
 
 Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in for over 10 minutes, SSH in again and `sudo reboot`<br>
 How do you tell? In FAHControl there's a "Logs" tab. Every several seconds you'll see "Download X%" until you get "Download complete" so if you see it got to some % but it's been over 10 minutes with no "Download complete" or other % update, then it's stuck and needs a reboot.
@@ -506,13 +513,13 @@ How do you tell? In FAHControl there's a "Logs" tab. Every several seconds you'l
 
 26. Add/Create an Automation Account and fill in the info. Name: you create (I named mine autobot), but the rest need to be chosen from their respective drop down menus, corresponding with the VM you made earlier, i.e. using the vm command from the beginning as an example, that would make Resource group = myCloudFolding and Location = East US. Then click Create
 
-27. When it lists your automation account, clicking on it opens a panel, then 12th item down click on Runbooks gallery [fig 16](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto2.gif)
+27. When it lists your automation account (may have to refresh), clicking on it opens a panel, then 12th item down click on Runbooks gallery [fig 16](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto2.gif)
 
 28. Click on "Start Azure V2 VMs" and then click on "Import" and OK [fig 17](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto3.gif)
 
-29. After importing it, click back to your automation Runbook gallery [fig 18](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto4.gif)
+29. After importing it, click your automation Runbook gallery [fig 18](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto4.gif)
 
-30. Now click on "Runbooks" and then the new "StartAzureV2Vm" [fig 19](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto5.gif)
+30. Click on "Runbooks" and then the new "StartAzureV2Vm" [fig 19](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto5.gif)
 
 31. Along the top, click on the "Edit" button
 
@@ -522,10 +529,10 @@ How do you tell? In FAHControl there's a "Logs" tab. Every several seconds you'l
 
 34. Select "Schedule | Link a schedule to your runbook"
 
-35. Click "Create a new schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and in the figure I have it set to check every 2 hours, then click "Create" [fig 21](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto7.gif)
+35. Click "Create a new schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and set for 1 per hour, then click "Create" [fig 21](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto7.gif)
 
 36. No need for "Parameters and run settings" so just click on "OK" 
-This schedule should restart any and all VMs, even those you later create, whether it be in the same or different Resource Groups. If for some reason you need different schedules for different VMs, you can specifically target a VM by name in "Parameters and run settings."<br> Lastly, the "Jobs" blade is how you check what/when schedules have ran if you're curious.
+This schedule should restart any and all VMs, even those you later create, whether it be in the same or different Resource Groups. If for some reason you need different schedules for different VMs, you can specifically target a VM by name and/or resource group in "Parameters and run settings," but be aware that this one will still restart all resources unless you put in names or resource groups here. <br> Lastly, the "Jobs" blade is how you check what/when schedules have ran if you're curious.
 
 
 
@@ -538,15 +545,15 @@ This schedule should restart any and all VMs, even those you later create, wheth
 38. A couple blades down in the left panel, click on the "Cost Analysis" blade. 
 
 39. About top-middle, open the date drop down and select "Custom date range" to pick your start day (or before it) to make sure you get your true cumulative total. [fig 22](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cm.gif) <br>
-In that figure, the solid green is the cost already spent, and the light green is the projected cost. The Azure algorithm will need 7 days of history to make accurate projections, so any changes will take days to stabilize projections. My typical price for 1 NC6s_v2 P100 VM was $5.22 per day, and that would leave quite a bit of unused credits after 30 days, so spinning up a 2nd NC6s_v2 VM for 7 - 8 days solves that problem, assuming your average prices are similar to mine. (Or if you start up with 2 VMs off the bat and keep going with them, that's about 18 and a half days you can run them without incurring charges, assuming steady and low prices... but that won't always be the case, so it might be a good idea to set up Budget Alerts to send yourself an email when you pass a certain threshold.
+In that figure, the solid green is the cost already spent (true amount delayed about a day), and the light green is the projected cost. The Azure algorithm will need 7 days of steady history to make accurate projections, so any changes will take days to stabilize projections. My typical price for 1 NC6s_v2 P100 VM was $5.22 per day, and that would leave quite a bit of unused credits after 30 days, so spinning up a 2nd NC6s_v2 VM for 5 - 8 days solves that problem, depending on how much your second VM's price fluctuates. In any case, it might be a good idea to set up Budget Alerts to send yourself emails when you pass certain thresholds.
   -  Budgets (right underneath the Cost Analysis blade in the panel)
      - "+ Add" button near top
-     - Reset period: I'd go with "Yearly" to avoid the costs resetting if you cross-over a month or a quarter
+     - Reset period: I'd go with "Yearly" to avoid the costs resetting if you cross-over to a new month or new quarter
      - Put in your budget of 200
-     - The next page you can set the alert thresholds, as many as you want, i.e. at 25%, 50%, 75%, 90%, 95%, and 100%
-     - Enter the email at which you wish to receive these alerts.
-     
-_Important Note_: Azure Billing seems to go by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th, if you're USA West coast (UTC-7) anything you use past 5pm on the 29th will be invoiced after your credits have expired.
+     - The next page you can set the alert thresholds, as many as you want, i.e. at 25%, 50%, 75%, 90%, 95%... (These have a few hrs delay too, so give yourself leeway)
+     - Enter the email at which you wish to receive these alerts. 
+
+_Important Note_: Azure Billing goes by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th and i.e. you're USA West coast (UTC-7) anything you use past 5pm on the 29th will be invoiced after your credits have expired.
 
 
 
@@ -564,5 +571,5 @@ press y to confirm and ENTER, and then you can close the CloudShell
 
 43. Click on your subscription name, then at the top you can click on "Cancel subscription" and follow the instruction to type something to confirm.
 
-Hopefully you have had enough time to use "Finish" on your FAHControl first to complete all current work units, as opposed to rushing to terminate before you start accruing charges :)
+Hopefully you have had enough time to use "Finish" on your FAHControl first to complete all current work units, as opposed to rushing to terminate before you start accruing charges :) It's just nicer on the progress of science that way, but it's not mandatory.
 
