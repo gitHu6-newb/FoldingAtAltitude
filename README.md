@@ -30,7 +30,7 @@ Take advantage of GCP's free $300 credits and Azure's $200 free credits in the f
 1. We start with a gmail account. GCP will occasionally send you emails, but you can unsubscribe. If you want to use a different gmail account, you can. Create a new gmail now if that's what you need to do.
 
 2. Then go to https://console.cloud.google.com
-Sign in, fill out the credit card verification, and make sure to create the INDIVIDUAL account, (not the business one). [fig 1](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/fig01.gif) (GCP will send some emails, like "Account confirmation - Complete your GCP Profile" but you can ignore all these b/c it's just checkboxes for your interests in order to send you more mail)
+Sign in, fill out the credit card verification, and make sure to create the INDIVIDUAL account, (not the business one). [fig 1](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/gfrmedia/fig01.gif) (GCP will send some emails, like "Account confirmation - Complete your GCP Profile" but you can ignore all these b/c it's just checkboxes for your interests in order to send you more mail)
 
 3. After finishing sign up, click on "Compute Engine" [fig 2](https://github.com/gitHu6-newb/FoldingAtAltitude/blob/gfrmedia/fig02.jpg)
 This will take some minutes for GCP to initialize on their backend.
