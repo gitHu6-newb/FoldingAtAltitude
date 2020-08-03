@@ -1,11 +1,11 @@
-# FoldingAtAltitude  (still under construction)
+# FoldingAtAltitude  
 (get it? because we're in the cloud)<br>
 
 ### A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
 
 Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
 
-# GCP guide
+# GCP guide (still under construction)
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade) <br>
   [B. request quota increase](#request-quota-increase)<br>
   [C. make a VM](#make-a-vm) <br>
@@ -26,7 +26,7 @@ Take advantage of GCP's free $300 credits and Azure's $200 free credits in the f
 
 ==================================================================================
 
-### GCP sign up and upgrade
+### GCP sign up and upgrade (still under construction)
 1. We start with a gmail account. GCP will occasionally send you emails, but you can unsubscribe. If you want to use a different gmail account, you can. Create a new gmail now if that's what you need to do.
 
 2. Then go to https://console.cloud.google.com
