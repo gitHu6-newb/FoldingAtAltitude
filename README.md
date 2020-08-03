@@ -373,7 +373,7 @@ az group create --location eastus --name myCloudFolding
 az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.30 --storage-sku StandardSSD_LRS
 ```
 "AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process) <br>
-"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days). Reasonable pricing is around 22 cents/hr, so worst case scenario this rides just under the max price all month, so *make sure you check credits at least once, 4 days before your 30-day expiration date to make sure you don't go over the limit.*
+"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days). Reasonable pricing is around 22 cents/hr, so worst case scenario this rides just under the max price all month, so **make sure you check credits at least once, 4 days before your 30-day expiration date to make sure you don't go over the limit.**
 
 
 
