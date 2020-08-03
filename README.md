@@ -555,6 +555,16 @@ In that figure, the solid green is the cost already spent (true amount delayed a
 
 _Important Note_: Azure Billing goes by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th and i.e. you're USA West coast (UTC-7) anything you use past 5pm on the 29th will be invoiced after your credits have expired.
 
+If you decide to make a 2nd VM, you can repeat steps (14) - (24) with something like this for step (14)
+```
+az group create --location eastus --name myCloudFolding2
+```
+```
+az vm create -n AzureFolding2 -g myCloudFolding2 --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.30 --storage-sku StandardSSD_LRS
+```
+That makes shutting down this second VM easy when the time comes with `az group delete -n myCloudFolding2 --no-wait`<br>
+Don't forget step (17) also requires a slight adjustment with "AzureFolding2NSG" and "myCloudFolding2"
+
 
 
 ### [Azure Shutdown](#azure-guide)
