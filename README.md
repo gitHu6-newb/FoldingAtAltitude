@@ -563,7 +563,7 @@ az group create --location eastus --name myCloudFolding2
 ```
 az vm create -n AzureFolding2 -g myCloudFolding2 --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.30 --storage-sku StandardSSD_LRS
 ```
-That makes shutting down this second VM easy when the time comes with `az group delete -n myCloudFolding2 --no-wait`<br>
+That makes shutting down this second VM easy when the time comes with `az group delete -n myCloudFolding2 --no-wait` but check your credits often to stay on top of things<br>
 Don't forget step (17) also requires a slight adjustment with "AzureFolding2NSG" and "myCloudFolding2"
 
 
