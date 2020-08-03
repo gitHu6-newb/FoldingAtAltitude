@@ -496,8 +496,9 @@ If you need to make name/team/passkey changes and are having trouble doing it in
 or team or passkey in place of user
 
 Just in case somebody forgoes a monitoring program, that person would have to SSH in again to take FAH off the pause state with `FAHClient --send-unpause`<br>
-The current logfile would be then viewed with `watch tail /var/lib/fahclient/log.txt` <br>(To exit that mode, hit Ctrl C )<br>
+The current logfile would be then viewed with `watch tail /var/lib/fahclient/log.txt` <br>
 Then wait for the progress %'s to start climbing for BOTH lines that have 0xa7 and 0x22 in them for decent confidence that all is working.<br>
+(To exit that mode, hit Ctrl c )<br>
 Every 2 - 6 hrs a WU should complete, which you can check by entering the name you picked at https://apps.foldingathome.org/cpu (typical delay ~ 10 min)
 
 Lastly if you ever get a stuck download, where it looks like it started downloading a new WU but then progress updates just stopped coming in for over 10 minutes, SSH in again and `sudo reboot`<br>
