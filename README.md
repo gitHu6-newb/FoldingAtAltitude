@@ -26,7 +26,7 @@ Take advantage of GCP's free $300 credits and Azure's $200 free credits in the f
 
 ==================================================================================
 
-### GCP sign up and upgrade (still under construction)
+### GCP sign up and upgrade
 1. We start with a gmail account. GCP will occasionally send you emails, but you can unsubscribe. If you want to use a different gmail account, you can. Create a new gmail now if that's what you need to do.
 
 2. Then go to https://console.cloud.google.com
@@ -76,7 +76,7 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 
 18. Click "CPU platform and GPU" then click on "Add GPU"<br>
  GPU type: select T4 (if selection not present, you'll have to change Zone from step (16))<br>
- Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also for step (17) use n1-highcpu-4
+ Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also for step (17) use n1-highcpu-4 )
 
 19. a couple lines below, double check to make sure Boot disk is set to Debian GNU/Linux 10 (buster)<br>
  if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
