@@ -5,7 +5,7 @@
 
 Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
 
-# GCP guide (still under construction)
+# GCP guide
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade) <br>
   [B. request quota increase](#request-quota-increase)<br>
   [C. make a VM](#make-a-vm) <br>
@@ -435,7 +435,7 @@ Note that the Total costs displayed are kept separately by month. To see your tr
 
 58. <br>
 
-    a) Emergency - if you forgot all about checking your credits and it's been over 3.5 months... you're defintely getting charged<br>
+    a) Emergency - if you forgot all about checking your credits and it's been over 3.5 months... you're definitely getting charged<br>
 `      `i) When at console.cloud.google.com, on the left, click "Go to project settings"<br>
 `     `ii) towards the top click the SHUTDOWN button and follow the directions<br>
 `    `iii) click hamburger, click Billing. (you can click View Report to find how much you owe, but let's proceed with shut down)<br>
