@@ -394,12 +394,12 @@ const _validatePayload = (payload) => {
 50. after validating your function it will show a green circle check mark next to its name. When you see green, click hamburger, then Cloud Scheduler
 
 51. click CREATE JOB. Pick a US location, like us-central, in the map (closer to your VM's region the better). Click NEXT
-    -a) give it a name
-    -b) in Frequency, use this: `*/15 * * * *`
-    -c) pick a time zone
-    -d) in Target choose "Pub/Sub"
-    -e) in Topic write: ` topic-starter`
-    -f) for Payload, the Zone must match what you chose during VM creation. Its Zone is listed on the VM when you go to the Compute Engine page.<br>
+    a) give it a name<br>
+    b) in Frequency, use this: `*/15 * * * *` <br>
+    c) pick a time zone<br>
+    d) in Target choose "Pub/Sub"<br>
+    e) in Topic write: ` topic-starter`<br>
+     Invoice month f) for Payload, the Zone must match what you chose during VM creation. Its Zone is listed on the VM when you go to the Compute Engine page.<br>
     `{"zone":"us-central1-a"}` [fig 15](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/media/fig_job.gif)
     
 52. click the CREATE button
