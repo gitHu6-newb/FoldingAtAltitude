@@ -393,7 +393,7 @@ const _validatePayload = (payload) => {
 
 50. after validating your function it will show a green circle check mark next to its name. When you see green, click hamburger, then Cloud Scheduler
 
-51. click CREATE JOB. Pick a US location, like us-central, in the map (closer to your VM's region the better). Click NEXT
+51. click CREATE JOB. Pick a US location, like us-central, in the map (closer to your VM's region the better). Click NEXT<br>
     a) give it a name<br>
     b) in Frequency, use this: `*/15 * * * *` <br>
     c) pick a time zone<br>
