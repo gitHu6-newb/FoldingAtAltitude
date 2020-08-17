@@ -441,16 +441,16 @@ Note that the Total costs displayed are kept separately by month. To see your tr
 `    `iii) click hamburger, click Billing. (you can click View Report to find how much you owe, but let's proceed with shut down)<br>
 `     `iv) Right side of page, click on "Manage"<br>
 `      `v) top-middle click on "CLOSE BILLING ACCOUNT" and follow the instruction<br>
-<br>
+    <br>
     b) A Gentle Shutdown - because researchers depend on the results of these WUs in order to build the next set of problems to fold, it's best to hit "Finish" on FAHControl so that it pauses itself once it finishes the current WU. Then that would be the ideal time to shut down like in (58)(a) <br>
-<br>
+    <br>
     c) if you're trying to squeeze out more WU with the few remaining credits, remember that:<br>
-`      `i) credits shown may be delayed by up to a day<br>
-`     `ii) try to make sure you have enough credits to finish an unexpectedly longer WU.<br>
+`        `i) credits shown may be delayed by up to a day<br>
+`       `ii) try to make sure you have enough credits to finish an unexpectedly longer WU.<br>
 `    `iii) if you're waiting with the VM in a Stopped state for credits to update, while you're not being charged for the VM unless it gets turned on, there are still small costs always accruing for the storage that everything sits on (almost 5 cents/day).<br>
 `     `iv) also, if you have VMs in the Stopped state, if you don't delete or edit your Cloud Scheduler Jobs, they will start your VM when you don't want them to<br>
-`      `v) if you removed your Cloud Scheduler Jobs and you decide to fold some more, you might need to recreate them again to handle preemptions<br>
-`     `vi) just because FAH is paused doesn't mean you're not getting charged. If the VM is on, it is costing you<br>
+`      ` v) if you removed your Cloud Scheduler Jobs and you decide to fold some more, you might need to recreate them again to handle preemptions<br>
+`     ` vi) just because FAH is paused doesn't mean you're not getting charged. If the VM is on, it is costing you<br>
 `    `vii) if you use up all your credits, you're now paying out of pocket<br>
 <br>
 The End.
