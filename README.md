@@ -76,7 +76,7 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 
 18. Click "CPU platform and GPU" then click on "Add GPU"<br>
  GPU type: select T4 (if selection not present, you'll have to change Zone from step (16))<br>
- Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also change (17) to 4 cores
+ Number of GPUs: 1 (unless you somehow were approved 4 GPUs, then use 4 and also for step (17) use n1-highcpu-4
 
 19. a couple lines below, double check to make sure Boot disk is set to Debian GNU/Linux 10 (buster)<br>
  if it's not that, then hit "Change" to select "Debian" and "Debian 10 buster"
@@ -110,7 +110,7 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 ```
 sudo apt install wget
 ```
- if it aks: Do you want to continue? [Y/n] <br>
+ if it asks: Do you want to continue? [Y/n] <br>
  press y and then ENTER 
 
 ```
@@ -120,7 +120,7 @@ sudo apt-get update
 ```
 sudo apt install clinfo
 ```
-
+  Y for yes to continue
 ```
 sudo apt-get install gcc make linux-headers-$(uname -r)
 ```
@@ -483,7 +483,7 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
   
 
 ### [Req quota increase](#azure-guide)
-We are just a couple CPU threads short of our ideal to fold with 2 P100's to burn through the $200 within 30 days if you are lucky enough to have consistently low pricing, so we're going to ask for a tad more just so that option is readily available should you need it.
+We are just a couple CPU threads short of our ideal to fold with 2 P100's to burn through the $200 within 30 days if you are lucky enough to have consistently low pricing, so we're going to ask for a tad more just so that option is readily available should you need it. Folding with just one only used about $160 for me.
 
 7. Click the hamburger and select the very bottom option "Help + support" (MS calls these blades).
 
@@ -686,7 +686,8 @@ How do you tell? In FAHControl there's a "Logs" tab. Every several seconds you'l
 
 34. Select "Schedule | Link a schedule to your runbook"
 
-35. Click "Create a new schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and set for 1 per hour, then click "Create" [fig 19](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto7.gif)
+35. Click "Create a new schedule," Give it a name, set the Starts date and time, change Recurrance from "Once" to "Recurring," and set for every 1 hour, then click "Create" [fig 19](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_auto7.gif)<br>
+(sorry I have a 2 in the figure. using 1 is better)
 
 36. No need for "Parameters and run settings" so just click on "OK" 
 This schedule should restart any and all VMs, even those you later create, whether it be in the same or different Resource Groups. If for some reason you need different schedules for different VMs, you can specifically target a VM by name and/or resource group in "Parameters and run settings," but be aware that this one will still restart all resources unless you put in names or resource groups here. <br> Lastly, the "Jobs" blade is how you check what/when schedules have ran if you're curious.
