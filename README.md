@@ -287,6 +287,12 @@ GCP automatically shuts down preemptible VMs after 24 hours of running, as well 
 
 46. Click SAVE, then NEXT
 
+46.(a) As of late Sept you must now enable the Cloud Build API. Click the "ENABLE API" button in the highlighted area [fig 14-a](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/media/fig_cf_api1.gif)
+
+46.(b) That opened the API page in a new tab. Click the "ENABLE" button. [fig 14-b](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/media/fig_cf_api2.gif)
+
+46.(c) When it finishes processing, you can close this API page and continue on to step (47) for your Cloud Function.
+
 47. Delete all the code you see in the box. Copy paste this code block below in its place:
 ```
 const Compute = require('@google-cloud/compute');
