@@ -69,9 +69,9 @@ This could take a minute or two to take effect. You will receive an email saying
 Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b.
 (If you are looking for P100 instead, choose, respectively c/f; b/c; or a/b.
 
-16(b). In Machine configuration, under Series, select "N1"
+17(a). In Machine configuration, under Series, select "N1"
 
-17. In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)<br>
+17(b). In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)<br>
   change the number of Cores to 1<br>
   change the Memory to 1.75<br>
  [fig 3](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/media/fig_03.gif)
