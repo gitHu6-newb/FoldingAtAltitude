@@ -3,7 +3,11 @@
 
 ### A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
 
-Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge!
+Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 3 months of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge! 
+```diff
+- UPDATE: GCP credits now expire after 90 days, so don't go past that <br>
+-         Still 30 days for Azure
+```
 
 # GCP guide
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade) <br>
