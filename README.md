@@ -8,6 +8,12 @@ Take advantage of GCP's free $300 credits and Azure's $200 free credits in the f
 - UPDATE: GCP credits now expire after 90 days, so don't go past that. 
 -         Still 30 days for Azure
 ```
+```diff
+- UPDATE: The computer from which you monitor the cloud fah clients MUST be version 7.6.21 or higher due to 
+security patches specifically related to remote monitoring (which is an option outlined below). It will be 
+mentioned again in each section when it applies. The version running on the cloud does not matter, which is 
+why you'll still see ver 13 in the guide.
+```
 
 # GCP guide
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade) <br>
@@ -257,7 +263,7 @@ sudo reboot
 `     `	e) check the box for "tcp:" and enter in 36330<br>
 `     `	f) click "CREATE"
 
-35. From a computer with FAH installed on it, look in the lower right system tray for the FAH icon, click it and open up "Advanced." This is your FAHControl. [fig 11](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_con.gif)
+35. From a computer with FAH installed on it (It MUST be version 7.6.21 or later because of important security patches), look in the lower right system tray for the FAH icon, click it and open up "Advanced." This is your FAHControl. [fig 11](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_con.gif)
 
 36. At the bottom of the left pane should be two buttons: Add and Remove; click on "Add"
 
@@ -658,7 +664,7 @@ sudo reboot
 ```
 and close the CloudShell
 
-In ~ 45 seconds this cloud client should be "Online" in your FAHControl, still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going. If you don't see the GPU slot, re-examine the `config.xml` file again, by opening CloudShell, press the up arrow key and you can ssh again to try step (24) once more.<br>
+In ~ 45 seconds this cloud client should be "Online" in your FAHControl (your version MUST be 7.6.21 or greater due to a security update), still paused, and you'll see a CPU and a GPU slot. Push "Fold" to get it going. If you don't see the GPU slot, re-examine the `config.xml` file again, by opening CloudShell, press the up arrow key and you can ssh again to try step (24) once more.<br>
 Careful not to accidentally move the Folding Power slide bar away from "full" in FAHControl. It took me way too long to notice that's what I had done once.
 If you need to make name/team/passkey changes and are having trouble doing it in FAHControl, SSH back in the VM and use `FAHClient --send-command "options user=xxxx"`<br>
 or team or passkey in place of user
