@@ -54,7 +54,7 @@ This could take a minute or two to take effect. You will receive an email saying
 
 6. Click the hamburger again, navigate into "IAM & Admin" and click on "Quotas"
 
-7. Along the top there is a single 'filter table' drop down menu. Click it and type GPU
+7. Along the top there is a single 'filter table' drop down menu. Click it and type in: region
 
 8. select the result for "GPUs (all regions)" which will list the Compute Engine API on the page. Mark its checkbox then click on "Edit Quotas" that's above it.
 
@@ -141,6 +141,7 @@ sudo apt-get install gcc make linux-headers-$(uname -r)
 ```
 wget download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb
 ```
+(please stick to the guide. Using a newer version at this step above only makes it harder to edit the config file!)
 ```
 wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-x86_64-410.104.run
 
