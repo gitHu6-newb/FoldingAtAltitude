@@ -43,9 +43,9 @@ why you'll still see ver 13 in the guide.
 Sign in, fill out the credit card verification, and make sure to create the INDIVIDUAL account, (not the business one). [fig 1](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/gfrmedia/fig01.gif) (GCP will send some emails, like "Account confirmation - Complete your GCP Profile" but you can ignore all these b/c it's just checkboxes for your interests in order to send you more mail)
 
 3. After finishing sign up, click on "Compute Engine" [fig 2](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/gfrmedia/fig02.jpg)
-This will take some minutes for GCP to initialize on their backend.
+This will take some minutes for GCP to initialize on their backend. You will see "Compute Engine is getting ready. This may take a minute or more."
 
-4. When that's done, click the the top left corner 'hamburger,' the 3 little horizontal lines, to open the Navigation Menu. Let's pin commonly used items to the top of the menu. Scroll down and look for "Compute Engine," and click on the 'push-pin' that appears when you mouse over the space to the left of the '>' which should pin Compute Engine to the top the menu. Now scroll about 40 items down into the TOOLS section to pin "Cloud Scheduler." Now scroll back up and just click on "Billing."
+4. When that's done (ignore the blue "Create" button for now), click the the top left corner 'hamburger,' the 3 little horizontal lines, to open the Navigation Menu. Let's pin commonly used items to the top of the menu. Scroll down and look for "Compute Engine," and click on the 'push-pin' that appears when you mouse over the space to the left of the '>' which should pin Compute Engine to the top the menu. Now scroll about 40 items down into the TOOLS section to pin "Cloud Scheduler." Now scroll back up and just click on "Billing."
 
 5. On the right side of the Billing page, under the circular graphic displaying your credits, click on the button to Upgrade your account.
 This could take a minute or two to take effect. You will receive an email saying "You've Upgraded." You can ignore it
@@ -56,7 +56,7 @@ This could take a minute or two to take effect. You will receive an email saying
 
 7. Along the top there is a single 'filter table' drop down menu. Click it and type in: region
 
-8. select the result for "GPUs (all regions)" which will list the Compute Engine API on the page. Mark its checkbox then click on "Edit Quotas" that's above it.
+8. select the result for "GPUs (all regions)" which will list the Compute Engine API on the page. Highlight this entry but take care not to click on a link such as 'Compute Engine API' or 'ALL QUOTAS.' A panel for GPUs will appear on the right. Mark the checkbox for 'Global' then click on "Edit Quotas" that's along the top.
 
 9. fill out your information in the open pane on the right and click next (any phone number will do). <br>
   I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. filter the quotas by 'preemptible' this time, and select the one with T4. Then filter by location and choose either central1, east1 or west1 to request 4. 
