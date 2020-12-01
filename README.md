@@ -56,7 +56,7 @@ This could take a minute or two to take effect. You will receive an email saying
 
 7. Along the top there is a single 'filter table' drop down menu. Click it and type in: region
 
-8. select the result for "GPUs (all regions)" which will list the Compute Engine API on the page. Highlight this entry but take care not to click on a link such as 'Compute Engine API' or 'ALL QUOTAS.' A panel for GPUs will appear on the right. Mark the checkbox for 'Global' then click on "Edit Quotas" that's along the top.
+8. select the result for "GPUs (all regions)" which will list the Compute Engine API on the page. Click to Highlight this entry but take care NOT to click on a link such as 'Compute Engine API' or 'ALL QUOTAS.' A panel for GPUs will appear on the right. Mark the checkbox for 'Global' then click on "Edit Quotas" that's along the top.
 
 9. fill out your information in the open pane on the right and click next (any phone number will do). <br>
   I previously read that if you managed to get a VM with x4 T4, it was half price as x2 P100 yet PPD-wise performs about the same but I have not been able to ever get more than 1 GPU spot approved. Maybe one of you could get lucky? If you do, you might also have to request a quota increase on the specific region as well, i.e. filter the quotas by 'preemptible' this time, and select the one with T4. Then filter by location and choose either central1, east1 or west1 to request 4. 
