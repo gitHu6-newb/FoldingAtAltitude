@@ -805,7 +805,7 @@ ERROR:}.  You may need to update your graphics drivers.
   ```
   sudo reboot
   ```
-  - and that's it. Changes are the previous GPU WU errored out previously, but you should be working on a new one now within a minute.<br>
+  - and that's it. Chances are the previous GPU WU errored out previously, but you should be working on a new one now within a minute.<br>
 <br>  
 
 T2. If your VMs are running but nothing is doing any calculations, check the log.
