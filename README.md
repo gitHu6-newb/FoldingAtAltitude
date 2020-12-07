@@ -14,6 +14,11 @@ security patches specifically related to remote monitoring (which is an option o
 mentioned again in each section when it applies. The version running on the cloud does not matter, which is 
 why you'll still see ver 13 in the guide.
 ```
+```diff
++ Added a troubleshooting section for a common issue
+```
+  [Troubleshoot Unexpected GPU stoppage](#troubleshooting)<br>
+  
 
 # GCP guide
   [A. sign up and upgrade](#gcp-sign-up-and-upgrade) <br>
@@ -730,7 +735,7 @@ In that figure, the solid green is the cost already spent (true amount delayed a
      - The next page you can set the alert thresholds, as many as you want, i.e. at 25%, 50%, 75%, 90%, 95%... (These can be delayed almost a day too, so give yourself leeway)
      - Enter the email at which you wish to receive these alerts. 
 
-_Important Note_: Azure Billing goes by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th and i.e. you're USA West coast (UTC-7) anything you use past 5pm on the 29th will be invoiced after your credits have expired.
+_Important Note_: Azure Billing goes by [UTC](https://time.is/UTC), so if your credits are set to expire on the 30th and i.e. you're USA West coast (UTC-7) anything you use past 5pm on the 29th will be invoiced after your credits have expired. (4pm if Daylight saving is over)
 
 If you decide to make a 2nd VM, you can repeat steps (14) - (24) with something like this for step (14)
 ```
@@ -760,3 +765,67 @@ press y to confirm and ENTER, and then you can close the CloudShell
 
 Hopefully you have had enough time to use "Finish" on your FAHControl first to complete all current work units, as opposed to rushing to terminate before you start accruing charges :) It's just nicer on the progress of science that way, but it's not mandatory.
 
+
+
+
+
+
+### [Troubleshooting](#foldingataltitude)
+For Both GCP and Azure: If you notice the VM is up but the GPU is not folding...
+
+T1. If you see these errors at the start of that day's log a simple driver reinstall will fix it:
+```
+ERROR:No compute devices matched GPU #0 
+ERROR:  "vendor": 4318
+ERROR:  "device": 7864
+ERROR:  "type": 2
+ERROR:  "species": 6
+ERROR:  "description": "TU104GL [Tesla T4] 8141"^[[0m
+ERROR:}.  You may need to update your graphics drivers.
+```
+  Then:
+  - a) Log into the respective GCP or Azure VM  like you did in GCP's step (23) or Azure's step (18).
+  - b) For GCP, rerun these commands
+  ```
+  sudo apt-get install gcc make linux-headers-$(uname -r)
+  ```
+  ```
+  sudo ./NVIDIA-Linux-x86_64-410.104.run
+  ```
+  - and select the options to Install Drivers Anyway at the prompt
+  - c) For Azure the commands are 
+  ```
+  sudo apt-get install gcc make linux-headers-$(uname -r)
+  ```
+  ```
+  sudo ./NVIDIA-Linux-x86_64-450.51.06.run
+  ```
+  - and also select the option to Install Drivers Anyway at the prompt
+  - d) When the reinstall is done and you hit Enter for 'OK' at the prompt,
+  ```
+  sudo reboot
+  ```
+  - and that's it. Changes are the previous GPU WU errored out previously, but you should be working on a new one now within a minute.<br>
+<br>  
+
+T2. If your VMs are running but nothing is doing any calculations, check the log.
+If they've been showing attempts to get work such as
+```
+03:35:34:WARNING:WU00:FS01:Failed to get assignment from 'assign1.foldingathome.org:80': No WUs available for this configuration
+03:35:34:WU00:FS01:Connecting to assign2.foldingathome.org:80
+03:35:34:WARNING:WU00:FS01:Failed to get assignment from 'assign2.foldingathome.org:80': No WUs available for this configuration
+03:35:34:WU00:FS01:Connecting to assign3.foldingathome.org:80
+03:35:34:WARNING:WU00:FS01:Failed to get assignment from 'assign3.foldingathome.org:80': No WUs available for this configuration
+03:35:34:WU00:FS01:Connecting to assign4.foldingathome.org:80
+03:35:34:WARNING:WU00:FS01:Failed to get assignment from 'assign4.foldingathome.org:80': No WUs available for this configuration
+```
+  - Then We have won the battle for today and we're waiting for the scientists to make more WUs for us. So just wait. Back on the Status tab of Advanced Control for FAH, in the right panel should be some details on the selected work unit. If you're clicked on the slot that's currently waiting, in the right panel by "Next Attempt" will show when the next try to get a WU will be. Shouldn't be more than an hour. If there's no time indicated (and the slot is currently not folding a WU), it might be a "stuck download" from the server. A "sudo reboot" should fix that.<br>
+<br>  
+
+T3. Anything else will require some more investigation. Help is available on the offical forum: https://foldingforum.org/viewtopic.php?f=24&t=26036
+Particularly important is the section on "How to post a logfile"
+
+There is also some unofficial help on r/Folding
+
+Thank you for participating! <br>
+[Return to top](#foldingataltitude)
