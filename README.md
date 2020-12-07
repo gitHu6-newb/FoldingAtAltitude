@@ -459,7 +459,7 @@ Note that the Total costs displayed are kept separately by month. To see your tr
 
 58. <br>
 
-    a) Emergency - if you forgot all about checking your credits and it's been over 3.5 months... you're definitely getting charged<br>
+    a) Emergency - if you forgot all about checking your credits and it's been over 3 months... you're definitely getting charged<br>
 `      `i) When at console.cloud.google.com, on the left, click "Go to project settings"<br>
 `     `ii) towards the top click the SHUTDOWN button and follow the directions<br>
 `    `iii) click hamburger, click Billing. (you can click View Report to find how much you owe, but let's proceed with shut down)<br>
