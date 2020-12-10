@@ -797,7 +797,7 @@ ERROR:}.  You may need to update your graphics drivers.
   sudo apt-get install gcc make linux-headers-$(uname -r)
   ```
   ```
-  sudo ./NVIDIA-Linux-x86_64-450.51.06.run
+  sudo ./NVIDIA-Linux-x86_64-450.80.02.run
   ```
   - and also select the option to Install Drivers Anyway at the prompt
   - d) When the reinstall is done and you hit Enter for 'OK' at the prompt,
