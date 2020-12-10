@@ -31,7 +31,7 @@ why you'll still see ver 13 in the guide.
   [H. Shutdown](#shutdown)<br>
 # Azure guide
   [A. sign up and upgrade](#sign-up-and-upgrade) <br>
-  ~~B. request quota increase~~(#req-quota-increase) <br>
+  ~~B. request quota increase~~ <br>
   [C. make VM(s)](#make-vms) <br>
   [D. prep the VM](#prep-the-vm) <br>
   [E. install / config / monitor FAH](#install--config--monitor-fah) <br>
