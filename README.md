@@ -3,7 +3,7 @@
 
 ### A guide on how to upgrade your free GCP and Azure tiers and then set them up for FAH as well as remote monitoring.
 
-Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 90 DAYS of GCP Nvidia T4 folding and 1 month of Azure Nvidia P100 folding. Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge! 
+Take advantage of GCP's free $300 credits and Azure's $200 free credits in the fight against Covid19. The guide covers 90 DAYS of GCP Nvidia T4 folding and 1 month of Azure Nvidia ~~P100~~ V100 folding (Dec 2020 update: great discount on V100s these days). Feel free to fold with a P100 on GCP but it will only last just under 1 month. Remember to Terminate your projects before your credits run out (and before your 30-day expiration date for Azure) in order to avoid getting a credit card charge! 
 ```diff
 - UPDATE: GCP credits now expire after 90 days, so don't go past that. 
 -         Still 30 days for Azure
@@ -31,7 +31,7 @@ why you'll still see ver 13 in the guide.
   [H. Shutdown](#shutdown)<br>
 # Azure guide
   [A. sign up and upgrade](#sign-up-and-upgrade) <br>
-  [B. request quota increase](#req-quota-increase) <br>
+  ~~B. request quota increase~~(#req-quota-increase) <br>
   [C. make VM(s)](#make-vms) <br>
   [D. prep the VM](#prep-the-vm) <br>
   [E. install / config / monitor FAH](#install--config--monitor-fah) <br>
@@ -507,6 +507,11 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
   
 
 ### [Req quota increase](#azure-guide)
+```
+-  Skip this section since we're going to use the V100 instead of the P100
+```
+[Go To Next Section](#make-vms) <br>
+
 We are just a couple CPU threads short of our ideal to fold with 2 P100's to burn through the $200 within 30 days if you are lucky enough to have consistently low pricing, so we're going to ask for a tad more just so that option is readily available should you need it. Folding with just one only used about $160 for me.
 
 7. Click the hamburger and select the very bottom option "Help + support" (MS calls these blades).
@@ -549,10 +554,10 @@ az group create --location eastus --name myCloudFolding
 ```
 "myCloudFolding" is a customizable name for your Resource Group, just remember if you change it, you'll have to change it everywhere else it appears
 ```
-az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v2 --priority Spot --max-price 0.30 --storage-sku StandardSSD_LRS
+az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v3 --priority Spot --max-price 0.31 --storage-sku StandardSSD_LRS
 ```
 "AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process) <br>
-"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days). Reasonable pricing is around 22 cents/hr, so worst case scenario this rides just under the max price all month, so **make sure you check credits at least once, 4 days before your 30-day expiration date to make sure you don't go over the limit.**
+"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days).  **Make sure you check credits at least once, 4 days before your 30-day expiration date to make sure you don't go over the limit.**
 
 
 
@@ -584,7 +589,7 @@ In the right most column will be the Public IP address
 
  We're now in the VM via SSH session using CloudShell. To get nvidia drivers working:
 ```
-wget us.download.nvidia.com/tesla/450.51.06/NVIDIA-Linux-x86_64-450.51.06.run
+wget us.download.nvidia.com/tesla/450.80.02/NVIDIA-Linux-x86_64-450.80.02.run
 ```
 ```
 sudo apt-get update
@@ -598,16 +603,16 @@ sudo apt-get install gcc make linux-headers-$(uname -r)
 ```
 At the prompt press y then ENTER to continue
 ```
-chmod +x NVIDIA-Linux-x86_64-450.51.06.run
+chmod +x NVIDIA-Linux-x86_64-450.80.02.run
 ```
  (if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete)<br>
  (that command also doesn't write anything to the screen, so just continue to the next command)
 ```
-sudo ./NVIDIA-Linux-x86_64-450.51.06.run
+sudo ./NVIDIA-Linux-x86_64-450.80.02.run
 ```
   (A bit different from GCP) Screen will fill with a bunch of dots before changing to a progress bar. A minute later... <br>
   There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK <br>
-  It'll ask you to "install 32-bit compatible libraries?" <br>
+  It'll ask you "install 32-bit compatible libraries?" <br>
     Move the white thing over to the "No" option and then hit ENTER [fig 9](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_nv.gif) <br>
   Finally, "Installation... complete" Just hit ENTER for OK )
 
@@ -650,7 +655,7 @@ FAHClient --send-command "options password=YourFAHRemotePassword"
 ```
 That is different from the passkey. It's the password you put in FAHControl in step (15)
 
-24. Wait 40 seconds. Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like <br>
+24. Wait 40 seconds (this gives FAH time to save the changes we made, and we're about to edit the same file so opening it before 30 seconds will present problems). Manually configure the GPU slot for FAH by adding some info at the end of the config file to make it look like <br>
 [fig 12](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_config.gif)
 ```
 sudo nano /etc/fahclient/config.xml
