@@ -507,7 +507,7 @@ Azure puts a 30-day time limit on the $200 free credits, and the clock starts ti
   
 
 ### [Req quota increase](#azure-guide)
-```
+```diff
 -  Skip this section since we're going to use the V100 instead of the P100
 ```
 [Go To Next Section](#make-vms) <br>
