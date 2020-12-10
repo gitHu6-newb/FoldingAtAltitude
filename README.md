@@ -565,7 +565,7 @@ az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-key
 ### [Prep the VM](#azure-guide)
 
 15. During this wait, from the computer you wish to monitor cloud folding with, find its IP address by visiting a website such as https://whatsmyip.org <br>
-You will need that number (I'll refer to as Your.Home.IP.Address) very soon, but first (still from your intended monitoring computer) find the FAH icon in the system tray (maybe hidden in the lower right corner), right click it and open the Advanced Control. This is FAHControl. [fig 7](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_con.gif)<br>
+You will need that number (I'll refer to as Your.Home.IP.Address) very soon, but first (still from your intended monitoring computer) find the FAH icon in the system tray (maybe hidden in the lower right corner), right click it and open the Advanced Control (**Important - your PC's version of FAH MUST be 7.6.21 or newer**). This is FAHControl. [fig 7](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_con.gif)<br>
 In the left panel at the bottom, click on "Add" which will open a configuration window for a connection to your cloud VM. Name it whatever you want, and for the password make something up unless you're already using one for your other clients (note: this is different from the passkey). Leave this window open. [fig 8](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_con2.gif)
 
 16. Back at your Azure CloudShell, if it has finished, it's displaying some text. The 2nd to last line should be "publicIpAddress":"xx.xx.xx.xx"<br>
