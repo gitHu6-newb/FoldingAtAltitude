@@ -560,7 +560,7 @@ az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-key
 "AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process) <br>
 "max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days).  **Make sure you check credits at least once, 4 days before your 30-day expiration date to make sure you don't go over the limit.**
 
-hmm... some people have started reporting they cannot create Spot VMs... it'll take me some time to figure this out, but if you're located in Europe will replacing all the commands that have "eastus" in them with "northeurope" make a difference? You'll have to use 0.34 for the price.
+hmm... some people from France have started reporting they cannot create Spot VMs... it'll take me some time to figure this out...
 
 
 
