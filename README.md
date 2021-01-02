@@ -88,7 +88,7 @@ Zone: Since we're looking for T4, respectively you may choose a/b/f; c/d; or a/b
 
 17(b). In Machine configuration change Machine type to "Custom" (it will be the very top item of that drop down list)<br>
   change the number of Cores to 1<br>
-  change the Memory to ~~1.75~~ 2<br>
+  change the Memory to 3<br>
  [fig 3](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/media/fig_03.gif)
 
 18. Click "CPU platform and GPU" then click on "Add GPU"<br>
