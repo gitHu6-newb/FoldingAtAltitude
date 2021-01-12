@@ -161,6 +161,7 @@ sudo ./NVIDIA-Linux-x86_64-410.104.run
   Screen will fill with a bunch of dots before changing to a progress bar. A minute later, there will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK<br>
  [fig 6](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/media/fig_xerr.gif)<br>
    The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries..." just hit ENTER to continue<br>
+   If it asks to install 32-bit libraries, move the white highlight to select 'No'[fig 6.5](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_nv.gif)<br>
    At "Installation... complete" Just hit ENTER for OK <br>
    Optional: You can check info on the GPU with command
 ```
@@ -613,7 +614,7 @@ chmod +x NVIDIA-Linux-x86_64-450.80.02.run
 ```
 sudo ./NVIDIA-Linux-x86_64-450.80.02.run
 ```
-  (A bit different from GCP) Screen will fill with a bunch of dots before changing to a progress bar. A minute later... <br>
+  Screen will fill with a bunch of dots before changing to a progress bar. A minute later... <br>
   There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK <br>
   It'll ask you "install 32-bit compatible libraries?" <br>
     Move the white thing over to the "No" option and then hit ENTER [fig 9](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_nv.gif) <br>
