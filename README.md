@@ -825,7 +825,17 @@ If they've been showing attempts to get work such as
   - Then We have won the battle for today and we're waiting for the scientists to make more WUs for us. So just wait. Back on the Status tab of Advanced Control for FAH, in the right panel should be some details on the selected work unit. If you're clicked on the slot that's currently waiting, in the right panel by "Next Attempt" will show when the next try to get a WU will be. Shouldn't be more than an hour. If there's no time indicated (and the slot is currently not folding a WU), it might be a "stuck download" from the server. A "sudo reboot" should fix that.<br>
 <br>  
 
-T3. Anything else will require some more investigation. Help is available on the offical forum: https://foldingforum.org/viewtopic.php?f=24&t=26036
+T3. If your instance looks offline in FahControl, check to see if perhaps its IP address changed. <br>
+  Log into your account to view your Virtual Machine. If in a 'Running' status you can copy the IP, then in your FahControl's left panel, doubleclick your entry to update the Hostname under the Connection tab. <br>
+  If your VM instance is offline (a stopped, or dissociated state), you can let your automatic start schedule handle it or you could select your VM and manually hit the Start button. <br>
+  In Azure only: if the attempt Fails or it's been more than a few hours of the actual VM being offline, the price probably increased.
+  Log into Azure and start Cloud Shell like in step(12). Update price with below command:
+  ```
+  az vm update -g myCloudFolding -n AzureFolding --max-price 0.37
+  ```
+  Then close cloud shell, go to view your VM, select and hit the start button, then once it's online copy the IP to update your FAHControl.
+
+T4. Anything else will require some more investigation. Help is available on the offical forum: https://foldingforum.org/viewtopic.php?f=24&t=26036
 Particularly important is the section on "How to post a logfile"
 
 There is also some unofficial help on r/Folding
