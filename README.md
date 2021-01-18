@@ -559,9 +559,9 @@ az group create --location eastus --name myCloudFolding
 az vm create -n AzureFolding -g myCloudFolding --image debian --generate-ssh-keys --size Standard_NC6s_v3 --priority Spot --max-price 0.31 --storage-sku StandardSSD_LRS
 ```
 "AzureFolding" is the name of the VM, which you also can change. (the above command will take about 2 minutes to process) <br>
-"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days).  **Make sure you check credits at least once, 4 days before your 30-day expiration date to make sure you don't go over the limit.**
+"max-price" sets a limit just in case demand causes a huge spike in pricing, and if passed, will preempt the VM (otherwise you'd be out of credits in days).  **Make sure you check credits at least once, 2 weeks in to make sure you don't go over the limit.** You should have between another 7 - 11 days available based on rates between $0.31-0.37
 
-hmm... some people from France have started reporting they cannot create Spot VMs... it'll take me some time to figure this out...
+hmm... some people from France have started reporting they cannot create Spot VMs... it'll take me some time to figure this out... if ever. If you've had Azure success or failure since January 2021, are you inside or outside the US? I'd like to hear about it on either the [foldingforum](https://foldingforum.org/viewtopic.php?f=16&t=36004) or reddit's [r/folding](https://www.reddit.com/r/Folding/)
 
 
 
