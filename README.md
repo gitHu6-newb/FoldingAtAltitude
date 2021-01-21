@@ -148,19 +148,18 @@ wget download.foldingathome.org/releases/public/release/fahclient/debian-stable-
 ```
 (please stick to the guide. Using a newer version at this step above only makes it harder to edit the config file!)
 ```
-wget us.download.nvidia.com/tesla/410.104/NVIDIA-Linux-x86_64-410.104.run
+wget us.download.nvidia.com/tesla/460.32.03/NVIDIA-Linux-x86_64-460.32.03.run
 
-chmod +x NVIDIA-Linux-x86_64-410.104.run
+chmod +x NVIDIA-Linux-x86_64-460.32.03.run
 ```
  if you're typing this one out, after you write 'N' you can hit TAB and it will autocomplete<br>
  (that chmod command also doesn't output anything, so just continue to the next command)<br>
 
 ```
-sudo ./NVIDIA-Linux-x86_64-410.104.run
+sudo ./NVIDIA-Linux-x86_64-460.32.03.run
 ```
   Screen will fill with a bunch of dots before changing to a progress bar. A minute later, there will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK<br>
  [fig 6](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/media/fig_xerr.gif)<br>
-   The next "WARNING: Unable to find suitable destination to install 32-bit compatible libraries..." just hit ENTER to continue<br>
    If it asks to install 32-bit libraries, move the white highlight to select 'No'[fig 6.5](https://raw.githubusercontent.com/gitHu6-newb/FoldingAtAltitude/azmedia/fig_nv.gif)<br>
    At "Installation... complete" Just hit ENTER for OK <br>
    Optional: You can check info on the GPU with command
@@ -593,7 +592,7 @@ In the right most column will be the Public IP address
 
  We're now in the VM via SSH session using CloudShell. To get nvidia drivers working:
 ```
-wget us.download.nvidia.com/tesla/450.80.02/NVIDIA-Linux-x86_64-450.80.02.run
+wget us.download.nvidia.com/tesla/460.32.03/NVIDIA-Linux-x86_64-460.32.03.run
 ```
 ```
 sudo apt-get update
@@ -607,12 +606,12 @@ sudo apt-get install gcc make linux-headers-$(uname -r)
 ```
 At the prompt press y then ENTER to continue
 ```
-chmod +x NVIDIA-Linux-x86_64-450.80.02.run
+chmod +x NVIDIA-Linux-x86_64-460.32.03.run
 ```
  (if you're typing these out, after you write 'N' you can hit TAB and it will autocomplete)<br>
  (that command also doesn't write anything to the screen, so just continue to the next command)
 ```
-sudo ./NVIDIA-Linux-x86_64-450.80.02.run
+sudo ./NVIDIA-Linux-x86_64-460.32.03.run
 ```
   Screen will fill with a bunch of dots before changing to a progress bar. A minute later... <br>
   There will be a "WARNING: nvidia installer was forced to guess..." Just hit ENTER for OK <br>
@@ -736,7 +735,7 @@ This schedule should restart any and all VMs, even those you later create, wheth
 38. A couple blades down in the left panel, click on the "Cost Analysis" blade. 
 
 39. About top-middle, open the date drop down and select "Custom date range" to pick your start day (or before it) to make sure you get your true cumulative total. [fig 20](https://encouragingcleanamazonprchase.s3-us-west-1.amazonaws.com/azupgr/fig_cm.gif) <br>
-In that figure, the solid green is the cost already spent (true amount delayed about a day), and the light green is the projected cost. The Azure algorithm will need 7 days of steady history to make accurate projections, so any changes will take days to stabilize projections. My typical price for 1 NC6s_v2 P100 VM was $5.22 per day, and that would leave quite a bit of unused credits after 30 days, so spinning up a 2nd NC6s_v2 VM for 5 - 8 days solves that problem, depending on how much your second VM's price fluctuates. In any case, it might be a good idea to set up Budget Alerts to send yourself emails when you pass certain thresholds.
+In that figure, the solid green is the cost already spent (true amount delayed about a day), and the light green is the projected cost. The Azure algorithm will need 7 days of steady history to make accurate projections, so any changes will take days to stabilize projections. My typical price for 1 NC6s_v2 P100 VM was $5.22 per day, and that would leave quite a bit of unused credits after 30 days, so spinning up a 2nd NC6s_v2 VM for 5 - 8 days solves that problem, depending on how much your second VM's price fluctuates. For 2021: with a V100 (NCs_v3) at $0.37/hr, 1 instance will last 3 weeks but will do more science than the 2xP100s put together. In any case, it might be a good idea to set up Budget Alerts to send yourself emails when you pass certain thresholds.
   -  Budgets (right underneath the Cost Analysis blade in the panel)
      - "+ Add" button near top
      - Reset period: I'd go with "Yearly" to avoid the costs resetting if you cross-over to a new month or new quarter
@@ -793,17 +792,17 @@ ERROR:}.  You may need to update your graphics drivers.
   sudo apt-get install gcc make linux-headers-$(uname -r)
   ```
   ```
-  sudo ./NVIDIA-Linux-x86_64-410.104.run
+  sudo ./NVIDIA-Linux-x86_64-460.32.03.run
   ```
-  - and select the options to Install Drivers Anyway at the prompt
+  - and select the options to Install Drivers Anyway at the prompt, and "No" for 32-bit libraries
   - c) For Azure the commands are 
   ```
   sudo apt-get install gcc make linux-headers-$(uname -r)
   ```
   ```
-  sudo ./NVIDIA-Linux-x86_64-450.80.02.run
+  sudo ./NVIDIA-Linux-x86_64-460.32.03.run
   ```
-  - and also select the option to Install Drivers Anyway at the prompt
+  - and also select the option to Install Drivers Anyway at the prompt, and "No" for 32-bit libraries
   - d) When the reinstall is done and you hit Enter for 'OK' at the prompt,
   ```
   sudo reboot
